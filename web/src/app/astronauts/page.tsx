@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Users, User, Activity, Heart, TrendingDown, TrendingUp, Filter } from 'lucide-react';
+import AstronautComparisonSystem from '@/components/AstronautComparisonSystem';
 
 // Import crew data
 import crewHealthData from '@/data/crew_health_data.json';
@@ -220,6 +221,11 @@ export default function AstronautsPage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Astronaut Comparison System */}
+        <section className="mb-16">
+          <AstronautComparisonSystem maxCompare={3} />
         </section>
 
         {/* Individual Profile Preview */}

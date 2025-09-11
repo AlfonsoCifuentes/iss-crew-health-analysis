@@ -4,21 +4,24 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Home, BarChart3, Rocket, Users, Brain, FileText, Settings } from 'lucide-react';
+import { Menu, X, BarChart3, Rocket, Users, Brain, FileText, Settings } from 'lucide-react';
 import SettingsModal from './SettingsModal';
+import LanguageSelector from './LanguageSelector';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 export default function GlobalNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   const navigation = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-    { name: 'Analytics', href: '/analytics', icon: Brain },
-    { name: 'Simulators', href: '/simulators', icon: Rocket },
-    { name: 'Astronauts', href: '/astronauts', icon: Users },
-    { name: 'Reports', href: '/reports', icon: FileText },
+    { name: t('navigation.dashboard'), href: '/dashboard', icon: BarChart3 },
+    { name: t('navigation.analysis'), href: '/analysis', icon: Brain },
+    { name: t('navigation.analytics'), href: '/analytics', icon: Brain },
+    { name: t('navigation.simulators'), href: '/simulators', icon: Rocket },
+    { name: t('navigation.astronauts'), href: '/astronauts', icon: Users },
+    { name: t('navigation.reports'), href: '/reports', icon: FileText },
   ];
 
   return (
@@ -65,6 +68,9 @@ export default function GlobalNavbar() {
                 </Link>
               );
             })}
+            
+            {/* Language Selector */}
+            <LanguageSelector />
             
             {/* Settings Button */}
             <button
@@ -117,6 +123,11 @@ export default function GlobalNavbar() {
               );
             })}
             
+            {/* Mobile Language Selector */}
+            <div className="px-3 py-2">
+              <LanguageSelector />
+            </div>
+            
             {/* Mobile Settings */}
             <button
               onClick={() => {
@@ -126,7 +137,7 @@ export default function GlobalNavbar() {
               className="flex items-center space-x-3 w-full px-3 py-2 rounded-md text-base font-medium transition-all duration-300 font-orbitron text-white/80 hover:text-yellow-400 hover:bg-yellow-400/5"
             >
               <Settings className="w-5 h-5" />
-              <span>Settings</span>
+              <span>{t('settings.title')}</span>
             </button>
           </div>
         </div>

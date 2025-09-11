@@ -1,9 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Rocket, Users, Activity, Brain, Zap, ArrowRight } from 'lucide-react';
 import RealStatsSection from '@/components/RealStatsSection';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 export default function HomePage() {
+  const { t } = useTranslation();
   return (
     <main className="min-h-screen">
 
@@ -44,7 +48,7 @@ export default function HomePage() {
               className="btn-cosmic text-base md:text-lg px-6 md:px-10 py-3 md:py-4 inline-flex items-center justify-center space-x-2 md:space-x-3 shadow-2xl w-full sm:w-auto"
             >
               <Activity className="w-5 h-5 md:w-6 md:h-6" />
-              <span>Explore Dashboard</span>
+              <span>{t('home.getStarted')}</span>
             </Link>
             <Link 
               href="/simulators" 

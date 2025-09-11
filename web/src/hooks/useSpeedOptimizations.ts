@@ -98,5 +98,7 @@ export function usePerformanceMonitoring() {
 
       return () => observer.disconnect();
     }
+    
+    return () => {}; // Return empty cleanup function if no observer
   }, []);
 }

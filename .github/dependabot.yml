@@ -1,0 +1,100 @@
+# Dependabot configuration for ISS Crew Health Analysis
+# Mantiene las dependencias actualizadas y seguras
+
+version: 2
+updates:
+  # Frontend dependencies (Next.js app)
+  - package-ecosystem: "npm"
+    directory: "/web"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "AlfonsoCifuentes"
+    assignees:
+      - "AlfonsoCifuentes"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "security"
+    # Agrupar actualizaciones menores
+    groups:
+      react-ecosystem:
+        patterns:
+          - "react*"
+          - "next*"
+          - "@types/react*"
+      testing-ecosystem:
+        patterns:
+          - "jest*"
+          - "@testing-library/*"
+          - "@types/jest"
+      dev-tools:
+        patterns:
+          - "eslint*"
+          - "prettier*"
+          - "typescript"
+          - "tailwindcss"
+    # Ignorar actualizaciones mayores automáticas para paquetes críticos
+    ignore:
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+
+  # Python dependencies (Data processing)
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "AlfonsoCifuentes"
+    assignees:
+      - "AlfonsoCifuentes"
+    commit-message:
+      prefix: "chore(deps-python)"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "python"
+      - "data-processing"
+    groups:
+      data-science:
+        patterns:
+          - "pandas*"
+          - "numpy*"
+          - "scipy*"
+          - "scikit-learn*"
+          - "matplotlib*"
+          - "seaborn*"
+      ml-tools:
+        patterns:
+          - "joblib*"
+          - "tensorflow*"
+          - "torch*"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+      time: "09:00"
+    open-pull-requests-limit: 2
+    reviewers:
+      - "AlfonsoCifuentes"
+    assignees:
+      - "AlfonsoCifuentes"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "ci/cd"
+      - "github-actions"

@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import SpaceBackgroundWrapper from '@/components/SpaceBackgroundWrapper';
 import GlobalNavbar from '@/components/GlobalNavbar';
+import { LocaleProvider } from '@/contexts/LocaleContext';
 
 const inter = Inter({
   variable: "--font-space",
@@ -76,18 +77,20 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-black min-h-screen text-white selection:bg-yellow-500/20`}
         suppressHydrationWarning={true}
       >
-        <div className="relative min-h-screen">
-          {/* Animated Space Background */}
-          <SpaceBackgroundWrapper />
-          
-          {/* Global Navigation */}
-          <GlobalNavbar />
-          
-          {/* Main Content */}
-          <div className="relative z-10 pt-12">
-            {children}
+        <LocaleProvider>
+          <div className="relative min-h-screen">
+            {/* Animated Space Background */}
+            <SpaceBackgroundWrapper />
+            
+            {/* Global Navigation */}
+            <GlobalNavbar />
+            
+            {/* Main Content */}
+            <div className="relative z-10 pt-12">
+              {children}
+            </div>
           </div>
-        </div>
+        </LocaleProvider>
         
         {/* Vercel Speed Insights & Analytics */}
         <SpeedInsights />

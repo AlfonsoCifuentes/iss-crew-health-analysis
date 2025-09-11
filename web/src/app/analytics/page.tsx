@@ -47,7 +47,7 @@ interface RealMetrics {
 
 export default function AdvancedAnalyticsPage() {
   const [analysis, setAnalysis] = useState<AdvancedAnalysis | null>(null);
-  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
+  const [, setRealMetrics] = useState<RealMetrics | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

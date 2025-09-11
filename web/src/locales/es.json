@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "dashboard": "Panel de Control",
+    "analysis": "Análisis", 
+    "analytics": "Analíticas",
+    "simulators": "Simuladores",
+    "about": "Acerca de",
+    "search": "Búsqueda Avanzada"
+  },
+  "dashboard": {
+    "title": "Panel de Salud de la Tripulación ISS",
+    "subtitle": "Análisis de Datos Reales de la NASA",
+    "overview": "Resumen",
+    "totalAstronauts": "Total de Astronautas",
+    "avgMissionDuration": "Duración Promedio de Misión",
+    "healthMetrics": "Métricas de Salud",
+    "boneDensityChange": "Cambio en Densidad Ósea",
+    "muscleMassChange": "Cambio en Masa Muscular",
+    "cardioChange": "Cambio Cardiovascular",
+    "viewDetails": "Ver Detalles",
+    "viewAll": "Ver Todo",
+    "quickActions": "Acciones Rápidas",
+    "exportData": "Exportar Datos",
+    "generateReport": "Generar Reporte",
+    "compareAstronauts": "Comparar Astronautas",
+    "predictiveModeling": "Modelado Predictivo",
+    "days": "días"
+  },
+  "analysis": {
+    "title": "Análisis de Salud de la Tripulación",
+    "filters": "Filtros",
+    "allMissions": "Todas las Misiones",
+    "allCountries": "Todos los Países", 
+    "allRoles": "Todos los Roles",
+    "results": "Resultados",
+    "astronauts": "astronautas",
+    "countries": "países",
+    "missions": "misiones",
+    "roles": "roles",
+    "name": "Nombre",
+    "mission": "Misión",
+    "duration": "Duración",
+    "country": "País",
+    "role": "Rol",
+    "age": "Edad",
+    "boneDensity": "Densidad Ósea",
+    "muscleMass": "Masa Muscular",
+    "cardiovascular": "Cardiovascular",
+    "exportFiltered": "Exportar Datos Filtrados"
+  },
+  "analytics": {
+    "title": "Analíticas Avanzadas",
+    "correlations": "Correlaciones",
+    "outliers": "Valores Atípicos",
+    "trends": "Tendencias",
+    "predictions": "Predicciones",
+    "loading": "Cargando analíticas..."
+  },
+  "simulators": {
+    "title": "Simuladores de Misión",
+    "riskAssessment": "Evaluación de Riesgos",
+    "healthPredictor": "Predictor de Salud",
+    "missionPlanner": "Planificador de Misiones"
+  },
+  "about": {
+    "title": "Acerca de Este Proyecto",
+    "dataSource": "Fuente de Datos",
+    "methodology": "Metodología",
+    "references": "Referencias"
+  },
+  "search": {
+    "placeholder": "Buscar astronautas, misiones, métricas...",
+    "filters": "Filtros",
+    "resetFilters": "Restablecer Filtros",
+    "noResults": "No se encontraron resultados",
+    "searchResults": "Resultados de Búsqueda"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "language": "Idioma",
+    "english": "Inglés",
+    "spanish": "Español"
+  }
+}

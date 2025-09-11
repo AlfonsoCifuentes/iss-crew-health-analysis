@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "analysis": "Analysis", 
+    "analytics": "Analytics",
+    "simulators": "Simulators",
+    "about": "About",
+    "search": "Advanced Search"
+  },
+  "dashboard": {
+    "title": "ISS Crew Health Dashboard",
+    "subtitle": "Real NASA Data Analysis",
+    "overview": "Overview",
+    "totalAstronauts": "Total Astronauts",
+    "avgMissionDuration": "Avg Mission Duration",
+    "healthMetrics": "Health Metrics",
+    "boneDensityChange": "Bone Density Change",
+    "muscleMassChange": "Muscle Mass Change",
+    "cardioChange": "Cardiovascular Change",
+    "viewDetails": "View Details",
+    "viewAll": "View All",
+    "quickActions": "Quick Actions",
+    "exportData": "Export Data",
+    "generateReport": "Generate Report",
+    "compareAstronauts": "Compare Astronauts",
+    "predictiveModeling": "Predictive Modeling",
+    "days": "days"
+  },
+  "analysis": {
+    "title": "Crew Health Analysis",
+    "filters": "Filters",
+    "allMissions": "All Missions",
+    "allCountries": "All Countries", 
+    "allRoles": "All Roles",
+    "results": "Results",
+    "astronauts": "astronauts",
+    "countries": "countries",
+    "missions": "missions",
+    "roles": "roles",
+    "name": "Name",
+    "mission": "Mission",
+    "duration": "Duration",
+    "country": "Country",
+    "role": "Role",
+    "age": "Age",
+    "boneDensity": "Bone Density",
+    "muscleMass": "Muscle Mass",
+    "cardiovascular": "Cardiovascular",
+    "exportFiltered": "Export Filtered Data"
+  },
+  "analytics": {
+    "title": "Advanced Analytics",
+    "correlations": "Correlations",
+    "outliers": "Outliers",
+    "trends": "Trends",
+    "predictions": "Predictions",
+    "loading": "Loading analytics..."
+  },
+  "simulators": {
+    "title": "Mission Simulators",
+    "riskAssessment": "Risk Assessment",
+    "healthPredictor": "Health Predictor",
+    "missionPlanner": "Mission Planner"
+  },
+  "about": {
+    "title": "About This Project",
+    "dataSource": "Data Source",
+    "methodology": "Methodology",
+    "references": "References"
+  },
+  "search": {
+    "placeholder": "Search astronauts, missions, metrics...",
+    "filters": "Filters",
+    "resetFilters": "Reset Filters",
+    "noResults": "No results found",
+    "searchResults": "Search Results"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "language": "Language",
+    "english": "English",
+    "spanish": "Spanish"
+  }
+}

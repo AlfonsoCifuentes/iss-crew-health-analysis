@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🚀 ISS Crew Health Analysis - Pre-commit Quality Check"
+
+# Lint staged files
+echo "📋 Running ESLint on staged files..."
+npx lint-staged
+
+# Type check
+echo "🔍 Type checking TypeScript files..."
+npx tsc --noEmit
+
+# Check for NASA data authenticity
+echo "✅ Verifying data authenticity (no hardcoded values)..."
+if grep -r "hardcoded\|fake\|simulated\|placeholder" src/ --exclude-dir=node_modules 2>/dev/null; then
+  echo "❌ Error: Found potential hardcoded or fake data references"
+  echo "   All data must be from real NASA sources only"
+  exit 1
+fi
+
+echo "🎯 Pre-commit checks passed! Committing real NASA data analysis..."

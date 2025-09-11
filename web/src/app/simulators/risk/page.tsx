@@ -5,14 +5,10 @@ import Link from 'next/link';
 import { 
   ArrowLeft, 
   AlertTriangle, 
-  Activity, 
   Shield, 
-  Users, 
-  Clock, 
   Target,
   Brain,
-  CheckCircle,
-  Rocket
+  CheckCircle
 } from 'lucide-react';
 
 // Interfaces for type safety
@@ -196,7 +192,7 @@ export default function RiskSimulatorPage() {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {riskFactors.map((factor, index) => {
+            {riskFactors.map((factor) => {
               const riskColor = factor.current > 20 ? 'text-red-400' : 
                                factor.current > 10 ? 'text-yellow-400' : 'text-blue-400';
               

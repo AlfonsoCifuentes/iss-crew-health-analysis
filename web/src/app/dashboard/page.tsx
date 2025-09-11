@@ -8,6 +8,9 @@ import HealthMetricsChart from '@/components/charts/HealthMetricsChart';
 import MissionTypesChart from '@/components/charts/MissionTypesChart';
 import CrewRolesChart from '@/components/charts/CrewRolesChart';
 import RealTimeMetrics from '@/components/RealTimeMetrics';
+import DataExportSystem from '@/components/DataExportSystem';
+import LanguageDemo from '@/components/LanguageDemo';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 interface AggregatedStats {
   key_metrics: {
@@ -39,6 +42,7 @@ interface AggregatedStats {
 
 export default function DashboardPage() {
   const [aggregatedStats, setAggregatedStats] = useState<AggregatedStats | null>(null);
+  const { t } = useTranslation();
   
   useEffect(() => {
     fetch('/data/aggregated_stats.json')
@@ -76,13 +80,20 @@ export default function DashboardPage() {
           </Link>
           
           <h1 className="text-4xl md:text-6xl font-bold text-cosmic-white mb-4 font-orbitron">
-            ISS Crew Health Dashboard
+            {t('dashboard.title')}
           </h1>
-          <p className="text-xl text-cosmic-white/80 max-w-4xl">
-            Comprehensive analysis of International Space Station crew health data using NASA LSDA. 
-            Explore real-time metrics, correlations, and predictive insights from microgravity research.
-          </p>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+            <p className="text-xl text-cosmic-white/80 max-w-4xl mb-4 lg:mb-0">
+              {t('dashboard.subtitle')}
+            </p>
+            <DataExportSystem />
+          </div>
         </div>
+
+        {/* Language Demo */}
+        <section className="mb-12">
+          <LanguageDemo />
+        </section>
 
         {/* Key Statistics Overview */}
         <section className="mb-16">
@@ -216,6 +227,24 @@ export default function DashboardPage() {
             <span>Real-time Analysis</span>
           </h2>
           <RealTimeMetrics />
+        </section>
+
+        {/* Advanced Analysis CTA */}
+        <section className="mb-16">
+          <div className="card-cosmic p-8 text-center">
+            <h3 className="text-2xl font-bold text-cosmic-white mb-4">Explore Advanced Analysis</h3>
+            <p className="text-cosmic-white/80 mb-6 max-w-2xl mx-auto">
+              Apply sophisticated filters to analyze specific subsets of NASA data. 
+              Filter by mission type, crew role, duration, and more to uncover detailed insights.
+            </p>
+            <Link 
+              href="/analysis"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-lg font-medium hover:bg-yellow-300 transition-colors"
+            >
+              <TrendingUp className="w-5 h-5" />
+              Advanced Analysis
+            </Link>
+          </div>
         </section>
       </div>
     </main>
