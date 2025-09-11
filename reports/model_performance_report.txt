@@ -1,0 +1,42 @@
+============================================================
+PREDICTIVE MODELING PERFORMANCE REPORT
+============================================================
+
+LINEAR REGRESSION:
+  R² Score: 0.9737
+  RMSE: 0.3230
+  MAE: 0.2757
+  Cross-Validation Score: 0.9373 ± 0.0456
+
+RIDGE REGRESSION:
+  R² Score: 0.9735
+  RMSE: 0.3241
+  MAE: 0.2694
+  Cross-Validation Score: 0.9348 ± 0.0500
+
+LASSO REGRESSION:
+  R² Score: 0.5213
+  RMSE: 1.3787
+  MAE: 0.9857
+  Cross-Validation Score: 0.4778 ± 0.0368
+
+RANDOM FOREST:
+  R² Score: 0.9578
+  RMSE: 0.4095
+  MAE: 0.3234
+  Cross-Validation Score: 0.9129 ± 0.0604
+
+GRADIENT BOOSTING:
+  R² Score: 0.9550
+  RMSE: 0.4225
+  MAE: 0.3217
+  Cross-Validation Score: 0.9154 ± 0.0544
+
+SVR:
+  R² Score: 0.8192
+  RMSE: 0.8472
+  MAE: 0.5374
+  Cross-Validation Score: 0.6504 ± 0.0784
+
+BEST PERFORMING MODEL: LINEAR REGRESSION
+Best R² Score: 0.9737

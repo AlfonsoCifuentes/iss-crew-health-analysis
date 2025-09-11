@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "total_models": 3,
+    "last_updated": "2025-09-09T23:57:40.045355",
+    "source": "Trained ML Models"
+  },
+  "models": {
+    "trained_models": {
+      "type": "<class 'dict'>",
+      "description": "Model metadata"
+    },
+    "scaler": {
+      "type": "StandardScaler",
+      "parameters": {
+        "copy": true,
+        "with_mean": true,
+        "with_std": true
+      }
+    },
+    "results": {
+      "type": "<class 'dict'>",
+      "description": "Model metadata"
+    }
+  }
+}

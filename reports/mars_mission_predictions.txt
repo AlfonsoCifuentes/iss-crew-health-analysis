@@ -1,0 +1,21 @@
+============================================================
+MARS MISSION PHYSIOLOGICAL IMPACT PREDICTIONS
+============================================================
+
+500 DAYS (1.4 YEARS) MISSION:
+  No predictions available
+
+600 DAYS (1.6 YEARS) MISSION:
+  No predictions available
+
+700 DAYS (1.9 YEARS) MISSION:
+  No predictions available
+
+800 DAYS (2.2 YEARS) MISSION:
+  No predictions available
+
+900 DAYS (2.5 YEARS) MISSION:
+  No predictions available
+
+NOTE: These predictions are based on historical ISS data
+and should be validated with additional research.

@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* ISS Hero Image Inspired Color Palette */
+  --color-iss-gold: 237 205 78; /* #edcd4e */
+  --color-iss-blue: 116 174 224; /* #74aee0 */
+  --color-iss-silver: 212 216 219; /* #d4d8db */
+  --color-iss-white: 237 245 252; /* #edf5fc */
+  --color-space-black: 0 0 0;
+  
+  --background: #000000;
+  --foreground: #edf5fc;
+}
+
+[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-orbitron: 'Orbitron', system-ui, sans-serif;
+  
+  /* ISS Hero Color Palette */
+  --color-iss-gold: 237 205 78;
+  --color-iss-blue: 116 174 224;
+  --color-iss-silver: 212 216 219;
+  --color-iss-white: 237 245 252;
+  --color-space-black: 0 0 0;
+  --color-success: 116 174 224;
+  --color-warning: 237 205 78;
+  --color-danger: 220 38 127;
+  --color-info: 116 174 224;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #edf5fc;
+  }
+}
+
+body {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
+  color: var(--foreground);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Custom button styles */
+.btn-cosmic {
+  padding: 0.75rem 1.5rem;
+  background: rgb(237 205 78);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: rgb(0 0 0);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn-cosmic:hover {
+  box-shadow: 0 0 20px rgba(237, 205, 78, 0.5);
+  transform: scale(1.05);
+  background: rgb(237 205 78 / 0.9);
+}
+
+.btn-outline-cosmic {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid rgb(237 205 78 / 0.5);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: rgb(237 245 252);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn-outline-cosmic:hover {
+  background: rgb(237 205 78 / 0.1);
+  border-color: rgb(237 205 78);
+  box-shadow: 0 0 20px rgba(237, 205, 78, 0.5);
+}
+
+/* Card styles */
+.card-cosmic {
+  background: rgb(116 174 224 / 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(237 205 78 / 0.2);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(116, 174, 224, 0.25);
+}
+
+.card-glass {
+  background: rgb(237 245 252 / 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(237 245 252 / 0.1);
+  border-radius: 0.75rem;
+}
+
+/* Text gradient effects */
+.text-gradient-cosmic {
+  color: rgb(237 205 78);
+}
+
+.text-gradient-gold {
+  color: rgb(237 205 78);
+}
+
+/* Interactive elements */
+.interactive-glow {
+  transition: all 0.3s ease;
+}
+
+.interactive-glow:hover {
+  box-shadow: 0 0 20px rgba(237, 205, 78, 0.5);
+  transform: scale(1.02);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.8); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Chart and data visualization customizations */
+.chart-container {
+  background: rgb(116 174 224 / 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgb(237 205 78 / 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Scrollbar styling using ISS color palette */
+.scrollbar-cosmic {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(116 174 224 / 0.5) transparent;
+}
+
+.scrollbar-cosmic::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-cosmic::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-cosmic::-webkit-scrollbar-thumb {
+  background: rgb(116 174 224 / 0.5);
+  border-radius: 4px;
+}
+
+.scrollbar-cosmic::-webkit-scrollbar-thumb:hover {
+  background: rgb(116 174 224 / 0.8);
+}
+
+/* Hero section optimizations */
+.hero-image {
+  object-fit: cover !important;
+  object-position: center center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .mobile-card {
+    margin: 0 1rem;
+    padding: 1rem;
+  }
+  
+  /* Ensure hero image maintains aspect ratio on mobile */
+  .hero-image {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Slider styles using ISS color palette */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: rgba(116, 174, 224, 0.2);
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.slider:hover {
+  background: rgba(116, 174, 224, 0.3);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: rgb(237, 205, 78);
+  cursor: pointer;
+  border: 2px solid rgb(237, 245, 252);
+  box-shadow: 0 2px 8px rgba(237, 205, 78, 0.4);
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 4px 16px rgba(237, 205, 78, 0.6);
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-track {
+  background: rgba(116, 174, 224, 0.2);
+  height: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: rgb(237, 205, 78);
+  cursor: pointer;
+  border: 2px solid rgb(237, 245, 252);
+  box-shadow: 0 2px 8px rgba(237, 205, 78, 0.4);
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  box-shadow: 0 4px 16px rgba(237, 205, 78, 0.6);
+  transform: scale(1.1);
+}
+
+/* Orbital animations */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 30s linear infinite;
+}
+
+/* Background gradient radial */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Typography Classes */
+.font-orbitron {
+  font-family: 'Orbitron', system-ui, sans-serif;
+}
+
+.text-heading-1 {
+  @apply font-orbitron text-4xl md:text-6xl lg:text-7xl font-bold;
+}
+
+.text-heading-2 {
+  @apply font-orbitron text-3xl md:text-4xl lg:text-5xl font-bold;
+}
+
+.text-heading-3 {
+  @apply font-orbitron text-2xl md:text-3xl font-bold;
+}
+
+.text-heading-4 {
+  @apply font-orbitron text-xl md:text-2xl font-bold;
+}
+
+/* Gamification Animations */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes achievement-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-achievement-bounce {
+  animation: achievement-bounce 0.6s ease-in-out;
+}

@@ -1,0 +1,23 @@
+============================================================
+ISS CREW HEALTH DATA - EXPLORATORY DATA ANALYSIS REPORT
+============================================================
+
+DATASET OVERVIEW:
+- Total records: 120
+- Total features: 20
+- Numerical features: 10
+- Categorical features: 4
+
+KEY STATISTICAL INSIGHTS:
+- mission_duration_days: Mean = 0.03, Std = 1.75
+- crew_age: Mean = 0.04, Std = 0.89
+- pre_flight_bone_density: Mean = 0.11, Std = 0.89
+- exercise_hours_per_week: Mean = -0.01, Std = 0.64
+- bone_density_change: Mean = -0.06, Std = 1.67
+- muscle_mass_change: Mean = -0.11, Std = 1.53
+- cardiovascular_change: Mean = 0.16, Std = 1.04
+- psychological_score_change: Mean = -0.03, Std = 0.79
+- crew_age_numeric: Mean = 0.04, Std = 0.89
+- outlier_consensus: Mean = 0.42, Std = 0.67
+
+============================================================
