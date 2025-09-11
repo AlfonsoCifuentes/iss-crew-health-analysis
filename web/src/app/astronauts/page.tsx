@@ -18,7 +18,7 @@ export default function AstronautsPage() {
   return (
     <main className="min-h-screen py-8 relative overflow-hidden">
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <div className="mb-12">
           <Link 

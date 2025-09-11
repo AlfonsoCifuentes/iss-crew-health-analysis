@@ -123,7 +123,7 @@ export default function HealthRiskCalculator() {
     <main className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-4xl mx-auto text-left">
+        <div className="w-full text-left">
           <Link 
             href="/simulators" 
             className="inline-flex items-center space-x-2 text-cosmic-white/70 hover:text-cosmic-white transition-colors mb-6"
@@ -141,7 +141,7 @@ export default function HealthRiskCalculator() {
           </p>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-16">
+        <div className="w-full mt-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Configuration Panel */}
             <div className="space-y-8">

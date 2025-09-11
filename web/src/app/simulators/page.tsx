@@ -13,7 +13,7 @@ export default function SimulatorsPage() {
   return (
     <main className="min-h-screen py-8 relative overflow-hidden">
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <div className="mb-12">
           <Link 
@@ -38,15 +38,28 @@ export default function SimulatorsPage() {
           <div className="card-cosmic p-8 interactive-glow">
             <div className="flex items-center space-x-3 mb-6">
               <Brain className="w-8 h-8 text-yellow-400" />
-              <h2 className="text-3xl font-bold text-star-gold font-orbitron">AI Model Status</h2>
+              <h2 className="text-3xl font-bold text-star-gold font-orbitron">Algorithm Status</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-400 mb-2">
-                  {modelMetadata.metadata.total_models}
+                  {modelMetadata.metadata.ml_models_trained}
                 </div>
-                <div className="text-cosmic-white/70">Active ML Models</div>
+                <div className="text-cosmic-white/70">ML Model Active</div>
+                <div className="text-sm text-cosmic-white/50 mt-1">
+                  🎯 Production Ready
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-400 mb-2">
+                  {modelMetadata.metadata.research_algorithms}
+                </div>
+                <div className="text-cosmic-white/70">Research Algorithms</div>
+                <div className="text-sm text-cosmic-white/50 mt-1">
+                  Validated & Active
+                </div>
               </div>
               
               <div className="text-center">
@@ -57,8 +70,99 @@ export default function SimulatorsPage() {
               </div>
               
               <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">97.3%</div>
-                <div className="text-cosmic-white/70">Prediction Accuracy</div>
+                <div className="text-3xl font-bold text-yellow-400 mb-2">94.7%</div>
+                <div className="text-cosmic-white/70">ML Model Accuracy</div>
+                <div className="text-sm text-cosmic-white/50 mt-1">
+                  R² Score (Bone Density)
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ML Model + Research Algorithms Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-cosmic-white mb-8 text-center font-orbitron">
+            Active Prediction Models
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* ML Model */}
+            <div className="card-cosmic p-6 border-2 border-yellow-400/20">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-yellow-400/20 rounded-lg flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-yellow-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-cosmic-white font-orbitron">ML Model</h3>
+                  <div className="text-xs text-yellow-400">🎯 ACTIVE</div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
+                  <span className="text-cosmic-white/90 text-sm">Bone Density Prediction</span>
+                  <span className="text-yellow-400 font-mono text-sm">Random Forest</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
+                  <span className="text-cosmic-white/90 text-sm">Accuracy (R² Score)</span>
+                  <span className="text-yellow-400 font-mono text-sm">94.73%</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
+                  <span className="text-cosmic-white/90 text-sm">Training Data</span>
+                  <span className="text-yellow-400 font-mono text-sm">120 samples</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Research Algorithms */}
+            <div className="card-cosmic p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-blue-400/20 rounded-lg flex items-center justify-center">
+                  <Calculator className="w-6 h-6 text-blue-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-cosmic-white font-orbitron">Research Algorithms</h3>
+                  <div className="text-xs text-blue-400">📚 VALIDATED</div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
+                  <span className="text-cosmic-white/90 text-sm">Muscle Mass Degradation</span>
+                  <span className="text-blue-400 font-mono text-sm">Literature-based</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
+                  <span className="text-cosmic-white/90 text-sm">Cardiovascular Risk</span>
+                  <span className="text-blue-400 font-mono text-sm">ISS Studies</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
+                  <span className="text-cosmic-white/90 text-sm">Psychological Impact</span>
+                  <span className="text-blue-400 font-mono text-sm">Isolation Research</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-yellow-400/10 to-blue-400/10 p-6 rounded-lg mt-8">
+            <div className="text-center">
+              <h4 className="text-xl font-bold text-cosmic-white mb-4 font-orbitron">
+                ✅ Hybrid Prediction System Active
+              </h4>
+              <p className="text-cosmic-white/80 text-sm mb-4">
+                Our API combines trained ML models with validated research algorithms for comprehensive health predictions
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div className="text-center">
+                  <div className="text-yellow-400 font-bold">ML Model</div>
+                  <div className="text-cosmic-white/60">Bone density changes</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-blue-400 font-bold">Research Algorithms</div>
+                  <div className="text-cosmic-white/60">Muscle, cardio, psychology</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-yellow-400 font-bold">Fallback Strategy</div>
+                  <div className="text-cosmic-white/60">Research-based if ML fails</div>
+                </div>
               </div>
             </div>
           </div>
@@ -195,9 +299,9 @@ export default function SimulatorsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-nebula-purple to-star-gold rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Brain className="w-8 h-8 text-cosmic-white" />
               </div>
-              <h3 className="text-xl font-bold text-cosmic-white mb-3">Machine Learning</h3>
+              <h3 className="text-xl font-bold text-cosmic-white mb-3">Research-Based Algorithms</h3>
               <p className="text-cosmic-white/70">
-                Advanced ML algorithms trained on real NASA LSDA data for accurate predictions
+                Validated algorithms based on NASA studies and space medicine research
               </p>
             </div>
             
@@ -205,9 +309,9 @@ export default function SimulatorsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-nebula-cyan to-nebula-purple rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Target className="w-8 h-8 text-cosmic-white" />
               </div>
-              <h3 className="text-xl font-bold text-cosmic-white mb-3">Precision Targeting</h3>
+              <h3 className="text-xl font-bold text-cosmic-white mb-3">Scientific Accuracy</h3>
               <p className="text-cosmic-white/70">
-                Highly accurate predictions with confidence intervals and uncertainty quantification
+                Predictions based on peer-reviewed literature and validated research findings
               </p>
             </div>
             

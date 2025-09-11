@@ -1,0 +1,31 @@
+{
+  "model_type": "RandomForestRegressor",
+  "target": "bone_density_change",
+  "features": [
+    "mission_duration_days",
+    "crew_age_numeric",
+    "pre_flight_bone_density",
+    "exercise_hours_per_week",
+    "mission_ISS_Expedition_long",
+    "mission_ISS_Expedition_short",
+    "mission_ISS_Expedition_standard",
+    "role_CDR",
+    "role_FE1",
+    "role_FE2",
+    "role_FE3"
+  ],
+  "n_features": 11,
+  "performance": {
+    "mse": 0.20923575855964685,
+    "rmse": 0.4574229536868989,
+    "mae": 0.34741445895392564,
+    "r2": 0.9473006039160758,
+    "cv_mean": 0.9087443801460864,
+    "cv_std": 0.07661350047707967
+  },
+  "training_date": "2025-09-11T17:28:08.857185",
+  "model_files": {
+    "model": "models\\bone_density_rf_model.joblib",
+    "scaler": "models\\feature_scaler.joblib"
+  }
+}

@@ -64,8 +64,8 @@ export default function HomePage() {
       </section>
 
       {/* Key Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-space-dark/80 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-20 px-6 sm:px-8 lg:px-12 bg-space-dark/80 backdrop-blur-sm">
+        <div className="w-full max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
             <div className="text-center">
               <div className="text-2xl md:text-4xl font-bold text-yellow-400 mb-2">120</div>
@@ -88,8 +88,8 @@ export default function HomePage() {
       </section>
       
       {/* Features Grid */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-6 sm:px-8 lg:px-12 relative">
+        <div className="w-full">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-cosmic-white mb-6 font-orbitron">
               Advanced Analytics
@@ -144,8 +144,8 @@ export default function HomePage() {
       </section>
       
       {/* Dashboard Preview Section */}
-      <section id="dashboard" className="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-7xl mx-auto">
+      <section id="dashboard" className="py-20 px-6 sm:px-8 lg:px-12 relative">
+        <div className="w-full">
           <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold text-cosmic-white mb-6 font-orbitron">
               Real NASA LSDA Data
@@ -254,8 +254,8 @@ export default function HomePage() {
       </section>
       
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-nebula-purple/10 to-nebula-pink/10 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative">
+      <section className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-nebula-purple/10 to-nebula-pink/10 relative overflow-hidden">
+        <div className="w-full max-w-5xl mx-auto text-center relative">
           <h2 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-6 font-orbitron">
             Ready to Explore Space Medicine?
           </h2>
@@ -275,8 +275,8 @@ export default function HomePage() {
       </section>
       
       {/* Footer */}
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-nebula-purple/20">
-        <div className="max-w-7xl mx-auto">
+      <footer className="py-12 px-6 sm:px-8 lg:px-12 border-t border-nebula-purple/20">
+        <div className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">

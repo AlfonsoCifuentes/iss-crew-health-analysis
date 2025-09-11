@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { spawn } from 'child_process'
+import path from 'path'
 
 interface PredictionRequest {
   mission_duration: number
@@ -7,10 +9,69 @@ interface PredictionRequest {
   age: number
   exercise_hours_per_day: number
   dietary_calcium_mg: number
+  mission_type?: string
+  crew_role?: string
 }
 
-// Modelo predictivo simplificado basado en datos NASA LSDA
-function predictHealthChanges(params: PredictionRequest) {
+// Función para llamar al modelo ML de Python
+async function callMLModel(params: PredictionRequest): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const pythonScript = path.join(process.cwd(), '..', 'ml_predictor.py')
+    
+    const pythonCode = `
+import sys
+sys.path.append('${path.join(process.cwd(), '..')}')
+from ml_predictor import predict_bone_density_change
+import json
+
+# Convert exercise hours per day to per week
+exercise_hours_per_week = ${params.exercise_hours_per_day} * 7
+
+result = predict_bone_density_change(
+    mission_duration_days=${params.mission_duration},
+    crew_age=${params.age},
+    pre_flight_bone_density=${params.initial_bone_density},
+    exercise_hours_per_week=exercise_hours_per_week,
+    mission_type="${params.mission_type || 'ISS_Expedition_standard'}",
+    crew_role="${params.crew_role || 'FE1'}"
+)
+
+print(json.dumps(result))
+`
+
+    const python = spawn('python', ['-c', pythonCode], {
+      cwd: path.join(process.cwd(), '..')
+    })
+
+    let dataStr = ''
+    let errorStr = ''
+
+    python.stdout.on('data', (data) => {
+      dataStr += data.toString()
+    })
+
+    python.stderr.on('data', (data) => {
+      errorStr += data.toString()
+    })
+
+    python.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`Python script failed: ${errorStr}`))
+        return
+      }
+
+      try {
+        const result = JSON.parse(dataStr)
+        resolve(result)
+      } catch (e) {
+        reject(new Error(`Failed to parse JSON: ${dataStr}`))
+      }
+    })
+  })
+}
+
+// Modelo predictivo simplificado como fallback
+function predictHealthChangesFallback(params: PredictionRequest) {
   const {
     mission_duration,
     initial_bone_density,
@@ -106,11 +167,12 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    const predictions = predictHealthChanges(body)
+    const predictions = await callMLModel(body).catch(() => predictHealthChangesFallback(body))
     
     return NextResponse.json({
       success: true,
       data: predictions,
+      model_used: predictions.model_info ? 'ML_Model' : 'Research_Based',
       timestamp: new Date().toISOString()
     })
     

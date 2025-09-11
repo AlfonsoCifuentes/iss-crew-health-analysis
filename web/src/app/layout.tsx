@@ -4,7 +4,6 @@ import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import SpaceBackgroundWrapper from '@/components/SpaceBackgroundWrapper';
 import GlobalNavbar from '@/components/GlobalNavbar';
-import GamificationSystem from '@/components/GamificationSystem';
 
 const inter = Inter({
   variable: "--font-space",
@@ -82,9 +81,6 @@ export default function RootLayout({
           
           {/* Global Navigation */}
           <GlobalNavbar />
-          
-          {/* Gamification System */}
-          <GamificationSystem />
           
           {/* Main Content */}
           <div className="relative z-10 pt-12">

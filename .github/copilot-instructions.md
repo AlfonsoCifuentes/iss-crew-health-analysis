@@ -46,6 +46,11 @@ También eres un artista CSS, SaSS, Bootstrap y Tailwind con varios premios a tu
 - **Conjunto completo**: Considerar todos los archivos del proyecto
 - **Principios SOLID**: Implementación robusta, mantenible y extensible
 - **Testing**: Verificar funcionalidad antes de marcar como completo
+- **⚠️ BUILDS RESPONSABLES**: Solo hacer `npm run build` cuando sea absolutamente necesario:
+  - Finalización completa de features
+  - Antes de deploy
+  - Errores de compilación críticos
+  - **NUNCA** por cambios menores de contenido/CSS
 
 ### 🎯 **METODOLOGÍA DE TRABAJO**
 Como agente de código de GitHub Copilot:
@@ -92,9 +97,10 @@ Como agente de código de GitHub Copilot:
 
 ### 🎯 **Durante Desarrollo**
 - [ ] Commits frecuentes con mensajes descriptivos
-- [ ] Testing manual en múltiples dispositivos
-- [ ] Validación de datos después de cambios
+- [ ] **BUILDS MÍNIMOS**: Solo hacer build cuando sea ESENCIAL (deploy, errores críticos, finalización completa)
+- [ ] Validación de datos después de cambios importantes
 - [ ] No usar `&&` en comandos de terminal
+- [ ] **EFICIENCIA**: Evitar builds por cambios menores de UI/contenido
 
 ### 🌇 **Final de Sesión**
 - [ ] Actualizar roadmap con progreso [x]

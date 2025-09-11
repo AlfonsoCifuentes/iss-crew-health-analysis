@@ -109,7 +109,7 @@ export default function RealTimeMetrics() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="text-center p-3 rounded-lg bg-space-deep/50">
           <div className="text-2xl font-bold text-yellow-400">{metrics.crew_status.total_crew}</div>
           <div className="text-sm text-cosmic-white/70">Total Crew</div>
@@ -122,11 +122,11 @@ export default function RealTimeMetrics() {
           <div className="text-2xl font-bold text-red-400">{metrics.crew_status.health_alerts}</div>
           <div className="text-sm text-cosmic-white/70">Health Alerts</div>
         </div>
-        <div className="text-center p-3 rounded-lg bg-space-deep/50">
-          <div className={`text-2xl font-bold ${getStatusColor(metrics.crew_status.overall_status)}`}>
+        <div className="text-center p-4 rounded-lg bg-space-deep/50">
+          <div className={`text-lg font-bold ${getStatusColor(metrics.crew_status.overall_status)} break-words leading-tight`}>
             {metrics.crew_status.overall_status}
           </div>
-          <div className="text-sm text-cosmic-white/70">Overall Status</div>
+          <div className="text-sm text-cosmic-white/70 mt-1">Overall Status</div>
         </div>
       </div>
 
