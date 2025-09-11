@@ -1,15 +1,27 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Rocket, Calculator, Brain, Target, TrendingDown, AlertTriangle } from 'lucide-react';
 
 // Import model data for predictions
 import modelMetadata from '@/data/model_metadata.json';
 
-export const metadata = {
-  title: 'Mission Simulators',
-  description: 'Advanced predictive simulators for Mars missions and crew health analysis using ML models',
-};
+interface RealMetrics {
+  simulators_page: {
+    ml_model_accuracy_percent: number;
+  };
+}
 
 export default function SimulatorsPage() {
+  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
+  
+  useEffect(() => {
+    fetch('/data/real_metrics.json')
+      .then(res => res.json())
+      .then(data => setRealMetrics(data))
+      .catch(error => console.error('Error loading real metrics:', error));
+  }, []);
   return (
     <main className="min-h-screen py-8 relative overflow-hidden">
       
@@ -44,7 +56,7 @@ export default function SimulatorsPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-400 mb-2">
-                  {modelMetadata.metadata.ml_models_trained}
+                  1
                 </div>
                 <div className="text-cosmic-white/70">ML Model Active</div>
                 <div className="text-sm text-cosmic-white/50 mt-1">
@@ -54,7 +66,7 @@ export default function SimulatorsPage() {
               
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-2">
-                  {modelMetadata.metadata.research_algorithms}
+                  5
                 </div>
                 <div className="text-cosmic-white/70">Research Algorithms</div>
                 <div className="text-sm text-cosmic-white/50 mt-1">
@@ -64,13 +76,15 @@ export default function SimulatorsPage() {
               
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-2">
-                  {new Date(modelMetadata.metadata.last_updated).toLocaleDateString()}
+                  {new Date(modelMetadata.model_info.training_date).toLocaleDateString()}
                 </div>
                 <div className="text-cosmic-white/70">Last Model Update</div>
               </div>
               
               <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">94.7%</div>
+                <div className="text-3xl font-bold text-yellow-400 mb-2">
+                  {realMetrics?.simulators_page.ml_model_accuracy_percent || '84.0'}%
+                </div>
                 <div className="text-cosmic-white/70">ML Model Accuracy</div>
                 <div className="text-sm text-cosmic-white/50 mt-1">
                   R² Score (Bone Density)

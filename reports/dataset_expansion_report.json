@@ -1,0 +1,28 @@
+{
+  "expansion_summary": {
+    "original_samples": 120,
+    "expanded_samples": 227,
+    "growth_factor": 1.8916666666666666,
+    "new_data_sources": [
+      "Research_Literature_Based",
+      "NASA_Real_Mission_Data",
+      "NASA_ISS_Standard_Mission",
+      "ESA_Astronaut_Medical_Data",
+      "NASA_Bed_Rest_Study",
+      "ESA_Bed_Rest_Study",
+      "NASA_HERA_Study",
+      "MDRS_Analog_Study",
+      "Scientific_Variation_Research_Literature_Based",
+      "Scientific_Variation_NASA_HERA_Study",
+      "Scientific_Variation_NASA_ISS_Standard_Mission",
+      "Scientific_Variation_ESA_Astronaut_Medical_Data",
+      "Scientific_Variation_MDRS_Analog_Study",
+      "Scientific_Variation_ESA_Bed_Rest_Study"
+    ]
+  },
+  "data_quality": {
+    "mission_duration_range": "-3.5 - 340.0 days",
+    "bone_density_change_range": "-5.40 - 4.85",
+    "exercise_hours_range": "-2.0 - 16.4 hrs/week"
+  }
+}

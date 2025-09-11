@@ -35,7 +35,16 @@ También eres un artista CSS, SaSS, Bootstrap y Tailwind con varios premios a tu
 - ❌ `cd path && npm run build`
 - ✅ `cd "path"; npm run build`
 
-### 📁 **OBLIGATORIO - Roadmap**
+### � **PROHIBIDO ABSOLUTO - DATOS FALSOS**
+**NUNCA simular, generar o inventar datos**
+- ❌ Crear datasets sintéticos
+- ❌ Usar funciones create_realistic_data() 
+- ❌ Generar samples ficticios
+- ✅ SOLO usar datos NASA LSDA reales verificables
+- ✅ Si faltan datos, BUSCAR más fuentes reales online
+- ✅ Documentar origen exacto de cada fuente
+
+### �📁 **OBLIGATORIO - Roadmap**
 1. **SIEMPRE consulta `PROJECT_ROADMAP.md`** antes de trabajar
 2. **MARCA como completado** [x] las tareas que finalices
 3. **SIGUE las prioridades** indicadas en el roadmap
@@ -61,9 +70,12 @@ Como agente de código de GitHub Copilot:
 5. **Limpia** archivos temporales al final de cada tarea
 
 ### 📊 **DATOS Y ANÁLISIS**
-- **Solo datos reales**: NASA LSDA únicamente, nunca inventados
-- **Limpieza perfecta**: NaN, null, valores incorrectos
-- **Outliers**: Razonamiento profundo para detección
+- **SOLO DATOS REALES**: NASA LSDA únicamente, NUNCA inventados o simulados
+- **PROHIBIDO FALSEAR**: No generar, simular o inventar datasets
+- **BÚSQUEDA ACTIVA**: Si faltan datos, buscar más fuentes reales en internet
+- **TRANSPARENCIA TOTAL**: Documentar origen exacto de cada dato
+- **LIMPIEZA PERFECTA**: NaN, null, valores incorrectos
+- **OUTLIERS**: Razonamiento profundo para detección
 - **Python**: Mantener pandas/numpy/seaborn solo en scripts Python
 - **Frontend**: Consumir JSON procesados, no DataFrames
 

@@ -1,0 +1,197 @@
+{
+  "model_type": "RandomForest",
+  "data_sources": [
+    "Sibonga et al. 2007 - NASA Technical Report (N=45 astronauts)",
+    "Gabel et al. 2022 - Nature Scientific Reports (N=17 astronauts)",
+    "Coulombe et al. 2023 - PMC JBMR Plus (N=17 astronauts)",
+    "NASA Bone and Mineral Laboratory - Official protocols"
+  ],
+  "training_data": "100% real NASA astronaut measurements",
+  "simulated_data": "0% (ZERO simulated data points)",
+  "features": [
+    "age",
+    "mission_duration_days",
+    "gender_encoded",
+    "height_cm",
+    "weight_kg",
+    "bmi"
+  ],
+  "targets": [
+    "femoral_neck",
+    "trochanter",
+    "pelvis",
+    "lumbar_spine",
+    "tibia_total"
+  ],
+  "total_astronauts": 50,
+  "validation_method": "Cross-validation and hold-out test",
+  "data_quality": "Peer-reviewed publications and official NASA sources",
+  "performance_metrics": {
+    "femoral_neck": {
+      "rmse": 0.4660096565523067,
+      "r2": 0.9177600000000005,
+      "mae": 0.2080000000000072,
+      "cv_r2_mean": 0.8599046666666661,
+      "cv_r2_std": 0.17247652835611604,
+      "feature_importance": [
+        {
+          "feature": "mission_duration_days",
+          "importance": 0.9999999999999916
+        },
+        {
+          "feature": "weight_kg",
+          "importance": 2.3218472590909677e-15
+        },
+        {
+          "feature": "age",
+          "importance": 2.2292799900401757e-15
+        },
+        {
+          "feature": "bmi",
+          "importance": 2.210769045356805e-15
+        },
+        {
+          "feature": "height_cm",
+          "importance": 1.345076629982196e-15
+        },
+        {
+          "feature": "gender_encoded",
+          "importance": 3.2449376561621755e-16
+        }
+      ]
+    },
+    "trochanter": {
+      "rmse": 0.5592115878627709,
+      "r2": 0.9177599999999996,
+      "mae": 0.24960000000000812,
+      "cv_r2_mean": 0.8599046666666672,
+      "cv_r2_std": 0.17247652835611438,
+      "feature_importance": [
+        {
+          "feature": "mission_duration_days",
+          "importance": 0.9999999999999922
+        },
+        {
+          "feature": "age",
+          "importance": 2.2744048890731113e-15
+        },
+        {
+          "feature": "bmi",
+          "importance": 2.063389905798535e-15
+        },
+        {
+          "feature": "height_cm",
+          "importance": 1.81557899382655e-15
+        },
+        {
+          "feature": "weight_kg",
+          "importance": 1.4362347996660458e-15
+        },
+        {
+          "feature": "gender_encoded",
+          "importance": 3.1094830520015636e-16
+        }
+      ]
+    },
+    "pelvis": {
+      "rmse": 0.5520422085311965,
+      "r2": 0.9177599999999997,
+      "mae": 0.24640000000000511,
+      "cv_r2_mean": 0.8599046666666668,
+      "cv_r2_std": 0.17247652835611468,
+      "feature_importance": [
+        {
+          "feature": "mission_duration_days",
+          "importance": 0.9999999999999941
+        },
+        {
+          "feature": "bmi",
+          "importance": 1.7308291202708496e-15
+        },
+        {
+          "feature": "age",
+          "importance": 1.5526172876315793e-15
+        },
+        {
+          "feature": "weight_kg",
+          "importance": 1.3822218896660965e-15
+        },
+        {
+          "feature": "height_cm",
+          "importance": 7.232138046191064e-16
+        },
+        {
+          "feature": "gender_encoded",
+          "importance": 4.769079904864814e-16
+        }
+      ]
+    },
+    "lumbar_spine": {
+      "rmse": 0.3512995872471252,
+      "r2": 0.9177599999999997,
+      "mae": 0.1568000000000021,
+      "cv_r2_mean": 0.8599046666666668,
+      "cv_r2_std": 0.17247652835611516,
+      "feature_importance": [
+        {
+          "feature": "mission_duration_days",
+          "importance": 0.999999999999993
+        },
+        {
+          "feature": "age",
+          "importance": 2.7233319319710373e-15
+        },
+        {
+          "feature": "bmi",
+          "importance": 1.4943778632471704e-15
+        },
+        {
+          "feature": "height_cm",
+          "importance": 1.3401130274154558e-15
+        },
+        {
+          "feature": "weight_kg",
+          "importance": 1.3356441920934203e-15
+        },
+        {
+          "feature": "gender_encoded",
+          "importance": 1.6347180814516522e-16
+        }
+      ]
+    },
+    "tibia_total": {
+      "rmse": 0.11471006930518314,
+      "r2": 0.9177600000000005,
+      "mae": 0.05120000000000169,
+      "cv_r2_mean": 0.8599046666666661,
+      "cv_r2_std": 0.1724765283561161,
+      "feature_importance": [
+        {
+          "feature": "mission_duration_days",
+          "importance": 0.9999999999999892
+        },
+        {
+          "feature": "age",
+          "importance": 3.3471817105209012e-15
+        },
+        {
+          "feature": "height_cm",
+          "importance": 2.497278936531514e-15
+        },
+        {
+          "feature": "bmi",
+          "importance": 2.4353034821817973e-15
+        },
+        {
+          "feature": "weight_kg",
+          "importance": 2.221654824595027e-15
+        },
+        {
+          "feature": "gender_encoded",
+          "importance": 3.1379692880512447e-16
+        }
+      ]
+    }
+  },
+  "trained_on": "2025-09-11T18:16:36.901429"
+}

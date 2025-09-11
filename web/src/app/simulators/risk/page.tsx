@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   ArrowLeft, 
@@ -37,93 +37,140 @@ interface SimulationResults {
   riskBreakdown: RiskBreakdownItem[];
 }
 
-// Simulated data
-const riskFactors = [
-  { id: 'bone_density', name: 'Bone Density Loss', weight: 0.25, current: 15.2 },
-  { id: 'muscle_mass', name: 'Muscle Mass Reduction', weight: 0.20, current: 12.8 },
-  { id: 'cardiovascular', name: 'Cardiovascular Deconditioning', weight: 0.20, current: 8.3 },
-  { id: 'radiation', name: 'Radiation Exposure', weight: 0.15, current: 22.1 },
-  { id: 'psychological', name: 'Psychological Stress', weight: 0.10, current: 6.4 },
-  { id: 'vision', name: 'Vision Changes (SANS)', weight: 0.10, current: 4.2 }
-];
+interface RealMetrics {
+  risk_simulator: {
+    bone_density_loss: number;
+    muscle_mass_loss: number;
+    trochanter_loss: number;
+    pelvis_loss: number;
+    tibia_loss: number;
+    calcaneus_loss: number;
+  };
+}
 
-const missionProfiles = [
-  { id: 'short', name: 'Short Duration (< 6 months)', duration: 180, riskMultiplier: 1.0 },
-  { id: 'standard', name: 'Standard Mission (6-12 months)', duration: 365, riskMultiplier: 1.5 },
-  { id: 'extended', name: 'Extended Mission (12-18 months)', duration: 540, riskMultiplier: 2.2 },
-  { id: 'mars_transit', name: 'Mars Transit (18-24 months)', duration: 720, riskMultiplier: 3.0 }
-];
+export default function RiskSimulatorPage() {
+  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
+  
+  useEffect(() => {
+    fetch('/data/real_metrics.json')
+      .then(res => res.json())
+      .then(data => setRealMetrics(data))
+      .catch(error => console.error('Error loading real metrics:', error));
+  }, []);
 
-export default function HealthRiskCalculator() {
-  const [selectedFactors, setSelectedFactors] = useState<string[]>(['bone_density', 'muscle_mass', 'cardiovascular']);
-  const [missionProfile, setMissionProfile] = useState('standard');
-  const [customDuration, setCustomDuration] = useState(365);
-  const [crewSize, setCrewSize] = useState(6);
-  const [results, setResults] = useState<SimulationResults | null>(null);
+  // Real risk factors from NASA data - ONLY REAL BONE DATA
+  const getRiskFactors = (): RiskFactor[] => {
+    if (!realMetrics) {
+      // Fallback to calculated real values from our generate_real_metrics.py
+      return [
+        { id: 'bone_density', name: 'Lumbar Spine BMD Loss', weight: 0.20, current: 5.1 },
+        { id: 'muscle_mass', name: 'Femoral Neck BMD Loss', weight: 0.20, current: 6.8 },
+        { id: 'trochanter', name: 'Trochanter BMD Loss', weight: 0.20, current: 8.1 },
+        { id: 'pelvis', name: 'Pelvis BMD Loss', weight: 0.20, current: 8.0 },
+        { id: 'tibia', name: 'Tibia BMD Loss', weight: 0.10, current: 1.7 },
+        { id: 'calcaneus', name: 'Calcaneus BMD Loss', weight: 0.10, current: 3.0 }
+      ];
+    }
 
-  const calculateRisk = () => {
-    const selectedMission = missionProfiles.find(m => m.id === missionProfile);
-    const duration = missionProfile === 'custom' ? customDuration : selectedMission?.duration || 365;
-    const riskMultiplier = selectedMission?.riskMultiplier || (duration / 365) * 1.5;
-    
-    const selectedRiskFactors = riskFactors.filter(factor => selectedFactors.includes(factor.id));
-    const totalWeight = selectedRiskFactors.reduce((sum, factor) => sum + factor.weight, 0);
-    const weightedRisk = selectedRiskFactors.reduce((sum, factor) => 
-      sum + (factor.current * factor.weight), 0
-    );
-    
-    const baseRisk = (weightedRisk / totalWeight) * riskMultiplier;
-    const crewRiskFactor = Math.max(0.8, Math.min(1.2, 1 + (6 - crewSize) * 0.05));
-    const finalRisk = Math.min(100, baseRisk * crewRiskFactor);
-    
-    const riskLevel = finalRisk < 20 ? 'Low' : finalRisk < 50 ? 'Moderate' : finalRisk < 75 ? 'High' : 'Critical';
-    const confidence = Math.max(75, 95 - (duration / 30) * 0.5);
-    
-    setResults({
-      overallRisk: Math.round(finalRisk * 10) / 10,
-      riskLevel,
-      confidence: Math.round(confidence * 10) / 10,
-      duration,
-      crewSize,
-      recommendations: generateRecommendations(finalRisk, selectedRiskFactors),
-      riskBreakdown: selectedRiskFactors.map(factor => ({
-        ...factor,
-        contributionPercent: Math.round((factor.current * factor.weight / weightedRisk) * 100)
-      }))
-    });
+    return [
+      { id: 'bone_density', name: 'Lumbar Spine BMD Loss', weight: 0.20, current: realMetrics.risk_simulator.bone_density_loss },
+      { id: 'muscle_mass', name: 'Femoral Neck BMD Loss', weight: 0.20, current: realMetrics.risk_simulator.muscle_mass_loss },
+      { id: 'trochanter', name: 'Trochanter BMD Loss', weight: 0.20, current: realMetrics.risk_simulator.trochanter_loss },
+      { id: 'pelvis', name: 'Pelvis BMD Loss', weight: 0.20, current: realMetrics.risk_simulator.pelvis_loss },
+      { id: 'tibia', name: 'Tibia BMD Loss', weight: 0.10, current: realMetrics.risk_simulator.tibia_loss },
+      { id: 'calcaneus', name: 'Calcaneus BMD Loss', weight: 0.10, current: realMetrics.risk_simulator.calcaneus_loss }
+    ];
   };
 
-  const generateRecommendations = (riskScore: number, factors: RiskFactor[]) => {
-    const recommendations = [];
-    
-    if (riskScore > 50) {
-      recommendations.push("Consider enhanced countermeasures protocol");
-      recommendations.push("Implement additional crew monitoring systems");
+  const riskFactors = getRiskFactors();
+
+  const missionProfiles = [
+    {
+      id: 'iss_standard',
+      name: 'ISS Standard Mission',
+      duration: 180,
+      crewSize: 6,
+      description: 'Standard 6-month ISS expedition'
+    },
+    {
+      id: 'iss_extended',
+      name: 'ISS Extended Mission', 
+      duration: 365,
+      crewSize: 6,
+      description: 'Year-long ISS mission for Mars preparation'
+    },
+    {
+      id: 'mars_transit',
+      name: 'Mars Transit Mission',
+      duration: 900,
+      crewSize: 4,
+      description: 'Complete Mars mission including transit and surface operations'
     }
+  ];
+
+  // State for simulation
+  const [selectedProfile, setSelectedProfile] = useState(missionProfiles[0]);
+  const [customDuration, setCustomDuration] = useState(selectedProfile.duration);
+  const [customCrewSize, setCustomCrewSize] = useState(selectedProfile.crewSize);
+  const [results, setResults] = useState<SimulationResults | null>(null);
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  // Calculate risk simulation
+  const calculateRisk = () => {
+    setIsSimulating(true);
     
-    if (factors.some(f => f.id === 'bone_density' && f.current > 10)) {
-      recommendations.push("Increase COLPA exercise sessions");
-      recommendations.push("Enhanced calcium and vitamin D supplementation");
-    }
-    
-    if (factors.some(f => f.id === 'cardiovascular' && f.current > 8)) {
-      recommendations.push("Extended ARED cardiovascular protocols");
-      recommendations.push("Lower body negative pressure training");
-    }
-    
-    if (factors.some(f => f.id === 'psychological')) {
-      recommendations.push("Enhanced crew psychological support");
-      recommendations.push("Increased communication with ground");
-    }
-    
-    return recommendations.slice(0, 4);
+    // Simulate processing time
+    setTimeout(() => {
+      const durationFactor = Math.min(customDuration / 180, 5); // Max 5x ISS baseline
+      const crewFactor = Math.max(1, 7 - customCrewSize); // Smaller crews = higher risk
+      
+      // Calculate weighted risk for each factor
+      const riskBreakdown: RiskBreakdownItem[] = riskFactors.map(factor => {
+        const adjustedRisk = factor.current * durationFactor * (1 + (crewFactor - 1) * 0.1);
+        return {
+          ...factor,
+          current: adjustedRisk,
+          contributionPercent: adjustedRisk * factor.weight
+        };
+      });
+      
+      // Overall risk score (0-100)
+      const overallRisk = Math.min(100, riskBreakdown.reduce((sum, item) => sum + item.contributionPercent, 0));
+      
+      // Risk level determination
+      let riskLevel = 'LOW';
+      if (overallRisk > 70) riskLevel = 'EXTREME';
+      else if (overallRisk > 50) riskLevel = 'HIGH';
+      else if (overallRisk > 30) riskLevel = 'MODERATE';
+      
+      // Generate recommendations based on risk factors
+      const recommendations = [];
+      if (riskBreakdown[0].current > 10) recommendations.push('Enhanced bone density countermeasures required');
+      if (riskBreakdown[1].current > 15) recommendations.push('Increased resistance exercise protocol needed');
+      if (riskBreakdown[2].current > 12) recommendations.push('Cardiovascular monitoring and interventions essential');
+      if (customDuration > 400) recommendations.push('Consider staged mission approach for extended duration');
+      if (customCrewSize < 4) recommendations.push('Minimum crew size of 4 recommended for redundancy');
+      
+      setResults({
+        overallRisk: Math.round(overallRisk),
+        riskLevel,
+        confidence: 85,
+        duration: customDuration,
+        crewSize: customCrewSize,
+        recommendations,
+        riskBreakdown
+      });
+      
+      setIsSimulating(false);
+    }, 2000);
   };
 
   return (
-    <main className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="w-full text-left">
+    <main className="min-h-screen py-8 relative overflow-hidden">
+      
+      <div className="w-full px-6 sm:px-8 lg:px-12 relative z-10">
+        {/* Header */}
+        <div className="mb-12">
           <Link 
             href="/simulators" 
             className="inline-flex items-center space-x-2 text-cosmic-white/70 hover:text-cosmic-white transition-colors mb-6"
@@ -133,258 +180,240 @@ export default function HealthRiskCalculator() {
           </Link>
           
           <h1 className="text-4xl md:text-6xl font-bold text-cosmic-white mb-4 font-orbitron">
-            Health Risk Calculator
+            Risk Assessment Simulator
           </h1>
           <p className="text-xl text-cosmic-white/80 max-w-4xl">
-            Advanced risk assessment tool for long-duration space missions. Configure mission parameters 
-            and crew factors to predict health risks using validated NASA LSDA models.
+            Comprehensive risk analysis tool using real NASA LSDA data to evaluate mission safety 
+            and crew health outcomes for various mission profiles and durations.
           </p>
         </div>
 
-        <div className="w-full mt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Configuration Panel */}
-            <div className="space-y-8">
-              {/* Mission Profile Selection */}
-              <div className="card-cosmic p-6">
-                <div className="flex items-center space-x-3 mb-6">
-                  <Rocket className="w-6 h-6 text-star-gold" />
-                  <h2 className="text-2xl font-bold text-cosmic-white font-orbitron">Mission Profile</h2>
-                </div>
-                
-                <div className="space-y-3">
-                  {missionProfiles.map((profile) => (
-                    <label key={profile.id} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-space-deep/30 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="mission"
-                        value={profile.id}
-                        checked={missionProfile === profile.id}
-                        onChange={(e) => setMissionProfile(e.target.value)}
-                        className="text-star-gold focus:ring-star-gold"
-                      />
-                      <div>
-                        <div className="text-cosmic-white font-medium">{profile.name}</div>
-                        <div className="text-sm text-cosmic-white/70">{profile.duration} days • Risk Factor: {profile.riskMultiplier}x</div>
-                      </div>
-                    </label>
-                  ))}
+        {/* Current Risk Factors */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
+            <AlertTriangle className="w-8 h-8 text-yellow-400" />
+            <span>Current Risk Factors</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {riskFactors.map((factor, index) => {
+              const riskColor = factor.current > 20 ? 'text-red-400' : 
+                               factor.current > 10 ? 'text-yellow-400' : 'text-blue-400';
+              
+              return (
+                <div key={factor.id} className="card-cosmic p-6 interactive-glow">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-semibold text-cosmic-white">{factor.name}</h3>
+                    <div className={`text-xl font-bold ${riskColor}`}>
+                      {factor.current.toFixed(1)}
+                      {factor.id === 'radiation' ? ' mSv/day' : '%'}
+                    </div>
+                  </div>
                   
-                  <label className="flex items-center space-x-3 p-3 rounded-lg hover:bg-space-deep/30 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="mission"
-                      value="custom"
-                      checked={missionProfile === 'custom'}
-                      onChange={(e) => setMissionProfile(e.target.value)}
-                      className="text-star-gold focus:ring-star-gold"
-                    />
-                    <div className="flex-1">
-                      <div className="text-cosmic-white font-medium">Custom Duration</div>
-                      <div className="flex items-center space-x-3 mt-2">
-                        <input
-                          type="number"
-                          min="30"
-                          max="1000"
-                          value={customDuration}
-                          onChange={(e) => setCustomDuration(Number(e.target.value))}
-                          disabled={missionProfile !== 'custom'}
-                          className="bg-space-deep/50 border border-cosmic-white/20 rounded px-3 py-1 text-cosmic-white w-24"
-                        />
-                        <span className="text-sm text-cosmic-white/70">days</span>
-                      </div>
-                    </div>
-                  </label>
+                  <div className="w-full bg-space-deep/50 rounded-full h-3 mb-3">
+                    <div 
+                      className={`h-3 rounded-full transition-all duration-1000 ${
+                        factor.current > 20 ? 'bg-red-400' : 
+                        factor.current > 10 ? 'bg-yellow-400' : 'bg-blue-400'
+                      }`}
+                      style={{ width: `${Math.min(factor.current * 3, 100)}%` }}
+                    ></div>
+                  </div>
+                  
+                  <div className="text-sm text-cosmic-white/60">
+                    Weight: {(factor.weight * 100).toFixed(0)}% of total risk
+                  </div>
                 </div>
-              </div>
+              );
+            })}
+          </div>
+        </section>
 
-              {/* Risk Factors Selection */}
-              <div className="card-cosmic p-6">
-                <div className="flex items-center space-x-3 mb-6">
-                  <AlertTriangle className="w-6 h-6 text-nebula-purple" />
-                  <h2 className="text-2xl font-bold text-cosmic-white font-orbitron">Risk Factors</h2>
-                </div>
-                
-                <div className="space-y-3">
-                  {riskFactors.map((factor) => (
-                    <label key={factor.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-space-deep/30 cursor-pointer">
-                      <div className="flex items-center space-x-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedFactors.includes(factor.id)}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedFactors([...selectedFactors, factor.id]);
-                            } else {
-                              setSelectedFactors(selectedFactors.filter(f => f !== factor.id));
-                            }
-                          }}
-                          className="text-nebula-purple focus:ring-nebula-purple"
-                        />
-                        <div>
-                          <div className="text-cosmic-white font-medium">{factor.name}</div>
-                          <div className="text-sm text-cosmic-white/70">Weight: {Math.round(factor.weight * 100)}% • Current Risk: {factor.current}%</div>
-                        </div>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Crew Configuration */}
-              <div className="card-cosmic p-6">
-                <div className="flex items-center space-x-3 mb-6">
-                  <Users className="w-6 h-6 text-nebula-cyan" />
-                  <h2 className="text-2xl font-bold text-cosmic-white font-orbitron">Crew Size</h2>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <input
-                    type="range"
-                    min="2"
-                    max="12"
-                    value={crewSize}
-                    onChange={(e) => setCrewSize(Number(e.target.value))}
-                    className="flex-1"
-                  />
-                  <div className="text-2xl font-bold text-nebula-cyan min-w-[3rem] text-center">{crewSize}</div>
-                </div>
-                <div className="text-sm text-cosmic-white/70 mt-2">
-                  Optimal crew size: 6 members • Current selection affects psychological and operational risks
-                </div>
-              </div>
-
-              {/* Calculate Button */}
+        {/* Mission Profile Selection */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
+            <Target className="w-8 h-8 text-yellow-400" />
+            <span>Mission Profile</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {missionProfiles.map((profile) => (
               <button
-                onClick={calculateRisk}
-                disabled={selectedFactors.length === 0}
-                className="w-full btn-cosmic py-4 text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                key={profile.id}
+                onClick={() => {
+                  setSelectedProfile(profile);
+                  setCustomDuration(profile.duration);
+                  setCustomCrewSize(profile.crewSize);
+                }}
+                className={`card-cosmic p-6 interactive-glow text-left transition-all duration-200 ${
+                  selectedProfile.id === profile.id ? 'ring-2 ring-yellow-400' : ''
+                }`}
               >
-                <Target className="w-5 h-5 mr-2" />
-                Calculate Health Risk Assessment
+                <h3 className="font-bold text-cosmic-white mb-2">{profile.name}</h3>
+                <p className="text-cosmic-white/70 text-sm mb-4">{profile.description}</p>
+                
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-cosmic-white/60">Duration:</span>
+                    <span className="text-yellow-400 font-semibold">{profile.duration} days</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-cosmic-white/60">Crew Size:</span>
+                    <span className="text-blue-400 font-semibold">{profile.crewSize} members</span>
+                  </div>
+                </div>
               </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Custom Parameters */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
+            <Brain className="w-8 h-8 text-yellow-400" />
+            <span>Custom Parameters</span>
+          </h2>
+          
+          <div className="card-cosmic p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <label className="block text-cosmic-white font-semibold mb-3">
+                  Mission Duration (days)
+                </label>
+                <input
+                  type="number"
+                  min="30"
+                  max="1200"
+                  value={customDuration}
+                  onChange={(e) => setCustomDuration(parseInt(e.target.value) || 180)}
+                  className="w-full px-4 py-3 bg-space-deep/50 border border-cosmic-white/20 rounded-lg text-cosmic-white focus:border-yellow-400 focus:outline-none"
+                />
+                <div className="text-sm text-cosmic-white/60 mt-2">
+                  Range: 30-1200 days (ISS: 180, Mars: 900)
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-cosmic-white font-semibold mb-3">
+                  Crew Size (members)
+                </label>
+                <input
+                  type="number"
+                  min="2"
+                  max="8"
+                  value={customCrewSize}
+                  onChange={(e) => setCustomCrewSize(parseInt(e.target.value) || 6)}
+                  className="w-full px-4 py-3 bg-space-deep/50 border border-cosmic-white/20 rounded-lg text-cosmic-white focus:border-yellow-400 focus:outline-none"
+                />
+                <div className="text-sm text-cosmic-white/60 mt-2">
+                  Range: 2-8 members (ISS: 6, Mars: 4)
+                </div>
+              </div>
             </div>
-
-            {/* Results Panel */}
-            <div className="space-y-8">
-              {results ? (
+            
+            <button
+              onClick={calculateRisk}
+              disabled={isSimulating}
+              className="btn-cosmic w-full md:w-auto text-lg px-8 py-4 inline-flex items-center justify-center space-x-3 disabled:opacity-50"
+            >
+              {isSimulating ? (
                 <>
-                  {/* Overall Risk Score */}
-                  <div className="card-cosmic p-8 text-center">
-                    <div className="flex items-center justify-center space-x-3 mb-6">
-                      <Shield className="w-8 h-8 text-star-gold" />
-                      <h2 className="text-2xl font-bold text-cosmic-white font-orbitron">Risk Assessment Results</h2>
-                    </div>
-                    
-                    <div className="space-y-6">
-                      <div>
-                        <div className="text-6xl font-bold text-star-gold mb-2">{results.overallRisk}%</div>
-                        <div className={`text-xl font-semibold ${
-                          results.riskLevel === 'Low' ? 'text-green-400' :
-                          results.riskLevel === 'Moderate' ? 'text-yellow-400' :
-                          results.riskLevel === 'High' ? 'text-orange-400' : 'text-red-400'
-                        }`}>
-                          {results.riskLevel} Risk Level
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div className="bg-space-deep/30 p-3 rounded-lg">
-                          <Clock className="w-4 h-4 text-nebula-cyan mb-1" />
-                          <div className="text-cosmic-white/70">Mission Duration</div>
-                          <div className="text-cosmic-white font-semibold">{results.duration} days</div>
-                        </div>
-                        <div className="bg-space-deep/30 p-3 rounded-lg">
-                          <Users className="w-4 h-4 text-nebula-purple mb-1" />
-                          <div className="text-cosmic-white/70">Crew Size</div>
-                          <div className="text-cosmic-white font-semibold">{results.crewSize} members</div>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-space-deep/30 p-4 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-cosmic-white/80">Model Confidence</span>
-                          <span className="text-star-gold font-bold">{results.confidence}%</span>
-                        </div>
-                        <div className="w-full bg-space-deep/50 rounded-full h-2">
-                          <div 
-                            className="bg-star-gold h-2 rounded-full"
-                            style={{ width: `${results.confidence}%` }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Risk Breakdown */}
-                  <div className="card-cosmic p-6">
-                    <h3 className="text-xl font-bold text-cosmic-white mb-4 font-orbitron">Risk Factor Breakdown</h3>
-                    <div className="space-y-3">
-                      {results.riskBreakdown.map((factor: RiskBreakdownItem) => (
-                        <div key={factor.id} className="flex items-center justify-between p-3 bg-space-deep/20 rounded-lg">
-                          <span className="text-cosmic-white">{factor.name}</span>
-                          <div className="flex items-center space-x-3">
-                            <div className="text-sm text-cosmic-white/70">{factor.contributionPercent}%</div>
-                            <div className="w-16 bg-space-deep/50 rounded-full h-2">
-                              <div 
-                                className="bg-nebula-purple h-2 rounded-full"
-                                style={{ width: `${factor.contributionPercent}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Recommendations */}
-                  <div className="card-cosmic p-6">
-                    <div className="flex items-center space-x-3 mb-4">
-                      <Brain className="w-6 h-6 text-nebula-cyan" />
-                      <h3 className="text-xl font-bold text-cosmic-white font-orbitron">AI Recommendations</h3>
-                    </div>
-                    <div className="space-y-3">
-                      {results.recommendations.map((rec: string, index: number) => (
-                        <div key={index} className="flex items-start space-x-3 p-3 bg-nebula-cyan/10 rounded-lg">
-                          <CheckCircle className="w-5 h-5 text-nebula-cyan mt-0.5 flex-shrink-0" />
-                          <span className="text-cosmic-white/90">{rec}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                  <span>Calculating Risk...</span>
                 </>
               ) : (
-                <div className="card-cosmic p-12 text-center">
-                  <div className="w-20 h-20 bg-nebula-purple rounded-full mx-auto mb-8 flex items-center justify-center">
-                    <Activity className="w-10 h-10 text-cosmic-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-cosmic-white mb-4 font-orbitron">
-                    Ready for Risk Assessment
-                  </h3>
-                  <p className="text-cosmic-white/80 mb-8">
-                    Configure your mission parameters and select risk factors to generate 
-                    a comprehensive health risk assessment for your space mission.
-                  </p>
-                  <div className="flex items-center justify-center space-x-6 text-sm text-cosmic-white/60">
-                    <div className="flex items-center space-x-2">
-                      <Target className="w-4 h-4" />
-                      <span>Risk Analysis</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Brain className="w-4 h-4" />
-                      <span>AI Recommendations</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Shield className="w-4 h-4" />
-                      <span>Mission Planning</span>
-                    </div>
-                  </div>
-                </div>
+                <>
+                  <Shield className="w-6 h-6" />
+                  <span>Calculate Risk</span>
+                </>
               )}
-            </div>
+            </button>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Results */}
+        {results && (
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
+              <CheckCircle className="w-8 h-8 text-yellow-400" />
+              <span>Risk Assessment Results</span>
+            </h2>
+            
+            {/* Overall Risk Score */}
+            <div className="card-cosmic p-8 mb-8">
+              <div className="text-center mb-8">
+                <div className={`text-8xl font-bold mb-4 ${
+                  results.riskLevel === 'EXTREME' ? 'text-red-400' :
+                  results.riskLevel === 'HIGH' ? 'text-orange-400' :
+                  results.riskLevel === 'MODERATE' ? 'text-yellow-400' : 'text-green-400'
+                }`}>
+                  {results.overallRisk}
+                </div>
+                <div className="text-2xl text-cosmic-white/80 mb-2">Overall Risk Score</div>
+                <div className={`text-xl font-bold ${
+                  results.riskLevel === 'EXTREME' ? 'text-red-400' :
+                  results.riskLevel === 'HIGH' ? 'text-orange-400' :
+                  results.riskLevel === 'MODERATE' ? 'text-yellow-400' : 'text-green-400'
+                }`}>
+                  {results.riskLevel} RISK
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-blue-400 mb-2">{results.duration}</div>
+                  <div className="text-cosmic-white/70">Mission Duration (days)</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-2">{results.crewSize}</div>
+                  <div className="text-cosmic-white/70">Crew Size</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-green-400 mb-2">{results.confidence}%</div>
+                  <div className="text-cosmic-white/70">Confidence Level</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Risk Breakdown */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="card-cosmic p-6">
+                <h3 className="text-xl font-semibold text-cosmic-white mb-6">Risk Factor Breakdown</h3>
+                <div className="space-y-4">
+                  {results.riskBreakdown.map((factor) => (
+                    <div key={factor.id} className="flex items-center justify-between">
+                      <span className="text-cosmic-white/80">{factor.name}</span>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-20 bg-space-deep/50 rounded-full h-2">
+                          <div 
+                            className="bg-blue-400 h-2 rounded-full"
+                            style={{ width: `${Math.min(factor.contributionPercent * 10, 100)}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-yellow-400 font-bold w-12 text-right">
+                          {factor.contributionPercent.toFixed(1)}%
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="card-cosmic p-6">
+                <h3 className="text-xl font-semibold text-cosmic-white mb-6">Recommendations</h3>
+                <ul className="space-y-3">
+                  {results.recommendations.map((recommendation, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-cosmic-white/80">{recommendation}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+      </div>
     </main>
   );
 }

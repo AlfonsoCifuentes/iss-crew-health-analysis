@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Rocket, Users, Activity, Brain, Zap, ArrowRight } from 'lucide-react';
+import RealStatsSection from '@/components/RealStatsSection';
 
 export default function HomePage() {
   return (
@@ -63,29 +64,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Key Stats Section */}
-      <section className="py-20 px-6 sm:px-8 lg:px-12 bg-space-dark/80 backdrop-blur-sm">
-        <div className="w-full max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
-            <div className="text-center">
-              <div className="text-2xl md:text-4xl font-bold text-yellow-400 mb-2">120</div>
-              <div className="text-xs md:text-base text-white/70">Crew Members</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-4xl font-bold text-blue-400 mb-2">186</div>
-              <div className="text-xs md:text-base text-white/70">Avg Mission Days</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-4xl font-bold text-yellow-400 mb-2">98.3%</div>
-              <div className="text-xs md:text-base text-white/70">Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-4xl font-bold text-blue-400 mb-2">15+</div>
-              <div className="text-xs md:text-base text-white/70">Health Metrics</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Key Stats Section - Real NASA Data */}
+      <RealStatsSection />
       
       {/* Features Grid */}
       <section className="py-20 px-6 sm:px-8 lg:px-12 relative">

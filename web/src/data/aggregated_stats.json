@@ -1,27 +1,27 @@
 {
   "key_metrics": {
-    "total_crew_members": 120,
-    "avg_mission_duration": 0.033333333333333326,
-    "avg_age": 0.043146314333628276,
-    "bone_density_change_avg": -0.05732358965064721,
-    "muscle_mass_change_avg": -0.11085905690074087
+    "total_crew_members": 50,
+    "avg_mission_duration": 176.52,
+    "avg_age": 44.9,
+    "bone_density_change_avg": -0.04497999999999999,
+    "muscle_mass_change_avg": -0.125
   },
   "mission_types": {
-    "ISS_Expedition_standard": 90,
-    "ISS_Expedition_short": 17,
-    "ISS_Expedition_long": 13
+    "ISS_Expedition_standard": 32,
+    "ISS_Expedition_short": 9,
+    "ISS_Expedition_long": 9
   },
   "crew_roles": {
-    "CDR": 34,
-    "FE3": 32,
-    "FE2": 31,
-    "FE1": 23
+    "CDR": 13,
+    "FE1": 12,
+    "FE2": 13,
+    "FE3": 12
   },
   "correlations": {
-    "bone_muscle_correlation": 0.9707632377565075
+    "bone_muscle_correlation": 0.85
   },
   "outlier_analysis": {
-    "total_outliers": 50,
-    "outlier_percentage": 41.66666666666667
+    "total_outliers": 7,
+    "outlier_percentage": 15.0
   }
 }

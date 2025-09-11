@@ -25,49 +25,79 @@ interface AdvancedAnalysis {
   };
 }
 
+interface RealMetrics {
+  analytics_page: {
+    correlations: {
+      age_vs_bone_loss: number;
+      duration_vs_muscle_loss: number;
+      exercise_vs_recovery: number;
+    };
+    outliers: {
+      extreme_bone_loss_percent: number;
+      rapid_recovery_percent: number;
+      overall_outliers_percent: number;
+    };
+    advanced_metrics: {
+      average_recovery_days: number;
+      total_measurements: number;
+      data_span_years: string;
+    };
+  };
+}
+
 export default function AdvancedAnalyticsPage() {
   const [analysis, setAnalysis] = useState<AdvancedAnalysis | null>(null);
+  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate advanced analysis computation
-    setTimeout(() => {
-      const advancedAnalysis: AdvancedAnalysis = {
-        correlations: {
-          age_vs_bone_loss: -0.73, // Negative correlation: older astronauts lose more bone
-          duration_vs_muscle_loss: -0.68, // Longer missions = more muscle loss
-          exercise_vs_recovery: 0.82  // More exercise = better recovery
-        },
-        outliers: {
-          extreme_bone_loss: 12.5, // Percentage of crew with >20% bone loss
-          rapid_muscle_recovery: 8.3, // Percentage with exceptional recovery
-          unusual_cardiovascular: 5.7 // Percentage with unexpected CV changes
-        },
-        predictive_insights: {
-          high_risk_factors: [
-            'Age > 45 years',
-            'Mission duration > 200 days',
-            'Low baseline bone density < 0.9 g/cm³',
-            'Insufficient exercise < 2 hours/day'
-          ],
-          recovery_predictors: [
-            'High exercise compliance during mission',
-            'Optimal nutrition and calcium intake',
-            'Age < 40 at mission start',
-            'Short mission duration < 120 days'
-          ],
-          mission_recommendations: [
-            'Implement personalized exercise protocols',
-            'Enhanced bone density monitoring for age >45',
-            'Nutritional interventions for long missions',
-            'Psychological support for extended missions'
-          ]
-        }
-      };
-      
-      setAnalysis(advancedAnalysis);
-      setLoading(false);
-    }, 1500);
+    // Load real metrics first
+    fetch('/data/real_metrics.json')
+      .then(res => res.json())
+      .then(realData => {
+        setRealMetrics(realData);
+        
+        // Use real metrics to create analysis
+        const advancedAnalysis: AdvancedAnalysis = {
+          correlations: {
+            age_vs_bone_loss: realData.analytics_page.correlations.age_vs_bone_loss,
+            duration_vs_muscle_loss: realData.analytics_page.correlations.duration_vs_muscle_loss,
+            exercise_vs_recovery: realData.analytics_page.correlations.exercise_vs_recovery
+          },
+          outliers: {
+            extreme_bone_loss: realData.analytics_page.outliers.extreme_bone_loss_percent,
+            rapid_muscle_recovery: realData.analytics_page.outliers.rapid_recovery_percent,
+            unusual_cardiovascular: realData.analytics_page.outliers.overall_outliers_percent
+          },
+          predictive_insights: {
+            high_risk_factors: [
+              'Age > 45 years',
+              'Mission duration > 200 days',
+              'Low baseline bone density < 0.9 g/cm³',
+              'Insufficient exercise < 2 hours/day'
+            ],
+            recovery_predictors: [
+              'High exercise compliance during mission',
+              'Optimal nutrition and calcium intake',
+              'Age < 40 at mission start',
+              'Short mission duration < 120 days'
+            ],
+            mission_recommendations: [
+              'Implement personalized exercise protocols',
+              'Enhanced bone density monitoring for age >45',
+              'Nutritional interventions for long missions',
+              'Psychological support for extended missions'
+            ]
+          }
+        };
+        
+        setAnalysis(advancedAnalysis);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error loading real metrics:', error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {

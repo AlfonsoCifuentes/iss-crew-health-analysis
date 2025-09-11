@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Users, User, Activity, Heart, TrendingDown, TrendingUp, Filter } from 'lucide-react';
 
@@ -5,15 +8,26 @@ import { ArrowLeft, Users, User, Activity, Heart, TrendingDown, TrendingUp, Filt
 import crewHealthData from '@/data/crew_health_data.json';
 import aggregatedStats from '@/data/aggregated_stats.json';
 
-export const metadata = {
-  title: 'Astronaut Profiles',
-  description: 'Individual crew member health profiles and comparative analysis from NASA LSDA',
-};
+interface RealMetrics {
+  astronauts_page: {
+    health_metrics_count: number;
+    data_completeness_percent: number;
+  };
+}
 
 export default function AstronautsPage() {
+  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
+  
+  useEffect(() => {
+    fetch('/data/real_metrics.json')
+      .then(res => res.json())
+      .then(data => setRealMetrics(data))
+      .catch(error => console.error('Error loading real metrics:', error));
+  }, []);
+
   // Calculate some example crew statistics
-  const totalCrew = crewHealthData.metadata.total_records;
-  const avgAge = Math.round(aggregatedStats.key_metrics.avg_age * 100);
+  const totalCrew = crewHealthData.total_astronauts;
+  const avgAge = Math.round(aggregatedStats.key_metrics.avg_age);
   
   return (
     <main className="min-h-screen py-8 relative overflow-hidden">
@@ -55,13 +69,17 @@ export default function AstronautsPage() {
             
             <div className="card-cosmic p-6 text-center interactive-glow">
               <Activity className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-cosmic-white mb-2">{crewHealthData.metadata.total_features}</div>
+              <div className="text-3xl font-bold text-cosmic-white mb-2">
+                {realMetrics?.astronauts_page.health_metrics_count || '9'}
+              </div>
               <div className="text-cosmic-white/70">Health Metrics</div>
             </div>
             
             <div className="card-cosmic p-6 text-center interactive-glow">
               <Heart className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-              <div className="text-3xl font-bold text-cosmic-white mb-2">98.3%</div>
+              <div className="text-3xl font-bold text-cosmic-white mb-2">
+                {realMetrics?.astronauts_page.data_completeness_percent || '100'}%
+              </div>
               <div className="text-cosmic-white/70">Data Completeness</div>
             </div>
           </div>
@@ -174,7 +192,7 @@ export default function AstronautsPage() {
                     <span className="text-nebula-cyan font-bold">High</span>
                   </div>
                   <p className="text-sm text-cosmic-white/80">
-                    Comprehensive health records with {crewHealthData.metadata.total_features} metrics per crew member
+                    Comprehensive health records with {realMetrics?.astronauts_page.health_metrics_count || '9'} metrics per crew member
                   </p>
                 </div>
                 

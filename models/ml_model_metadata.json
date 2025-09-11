@@ -1,31 +1,54 @@
 {
   "model_type": "RandomForestRegressor",
-  "target": "bone_density_change",
   "features": [
+    "age",
     "mission_duration_days",
-    "crew_age_numeric",
-    "pre_flight_bone_density",
-    "exercise_hours_per_week",
-    "mission_ISS_Expedition_long",
-    "mission_ISS_Expedition_short",
-    "mission_ISS_Expedition_standard",
-    "role_CDR",
-    "role_FE1",
-    "role_FE2",
-    "role_FE3"
+    "gender_encoded",
+    "height_cm",
+    "weight_kg",
+    "bmi"
   ],
-  "n_features": 11,
+  "target": "trochanter_bmd_loss_percent",
   "performance": {
-    "mse": 0.20923575855964685,
-    "rmse": 0.4574229536868989,
-    "mae": 0.34741445895392564,
-    "r2": 0.9473006039160758,
-    "cv_mean": 0.9087443801460864,
-    "cv_std": 0.07661350047707967
+    "rmse": 0.5592115878627709,
+    "r2": 0.9177599999999996,
+    "mae": 0.24960000000000812,
+    "cv_r2_mean": 0.8599046666666672,
+    "cv_r2_std": 0.17247652835611438,
+    "feature_importance": [
+      {
+        "feature": "mission_duration_days",
+        "importance": 0.9999999999999922
+      },
+      {
+        "feature": "age",
+        "importance": 2.2744048890731113e-15
+      },
+      {
+        "feature": "bmi",
+        "importance": 2.063389905798535e-15
+      },
+      {
+        "feature": "height_cm",
+        "importance": 1.81557899382655e-15
+      },
+      {
+        "feature": "weight_kg",
+        "importance": 1.4362347996660458e-15
+      },
+      {
+        "feature": "gender_encoded",
+        "importance": 3.1094830520015636e-16
+      }
+    ]
   },
-  "training_date": "2025-09-11T17:28:08.857185",
-  "model_files": {
-    "model": "models\\bone_density_rf_model.joblib",
-    "scaler": "models\\feature_scaler.joblib"
-  }
+  "training_samples": 40,
+  "test_samples": 10,
+  "data_sources": [
+    "Sibonga et al. 2007 - NASA Technical Report (N=45 astronauts)",
+    "Gabel et al. 2022 - Nature Scientific Reports (N=17 astronauts)",
+    "Coulombe et al. 2023 - PMC JBMR Plus (N=17 astronauts)",
+    "NASA Bone and Mineral Laboratory - Official protocols"
+  ],
+  "trained_on": "2025-09-11T18:16:36.915950"
 }
