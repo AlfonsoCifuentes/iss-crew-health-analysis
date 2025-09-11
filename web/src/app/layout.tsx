@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import SpaceBackgroundWrapper from '@/components/SpaceBackgroundWrapper';
 import GlobalNavbar from '@/components/GlobalNavbar';
 
@@ -88,8 +89,9 @@ export default function RootLayout({
           </div>
         </div>
         
-        {/* Vercel Speed Insights */}
+        {/* Vercel Speed Insights & Analytics */}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
