@@ -24,6 +24,17 @@ const messageMap = {
   es: esMessages,
 } as const;
 
+// Debug: Check if messages are loaded correctly
+console.log('=== LOCALE CONTEXT DEBUG ===');
+console.log('EN messages available:', !!enMessages);
+console.log('ES messages available:', !!esMessages);
+console.log('EN dashboard available:', !!enMessages.dashboard);
+console.log('ES dashboard available:', !!esMessages.dashboard);
+if (enMessages.dashboard && typeof enMessages.dashboard === 'object') {
+  console.log('EN dashboard keys count:', Object.keys(enMessages.dashboard).length);
+  console.log('EN has healthCorrelations:', 'healthCorrelations' in enMessages.dashboard);
+}
+
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('en');
   const [messages, setMessages] = useState<Messages>(messageMap.en);
