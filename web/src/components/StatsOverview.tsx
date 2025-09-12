@@ -40,12 +40,12 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
   };
 
   const formatDuration = (duration: number) => {
-    const days = Math.round(duration * 365);
+    const days = Math.round(duration);
     return `${days} days`;
   };
 
   const formatAge = (age: number) => {
-    const years = Math.round(age * 100);
+    const years = Math.round(age);
     return `${years} years`;
   };
 
