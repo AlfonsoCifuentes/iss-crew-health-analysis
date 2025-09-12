@@ -16,7 +16,7 @@ export default function HomePage() {
         {/* Full-width ISS Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/iss_hero.jpg" 
+            src="/api/images/iss_hero.jpg" 
             alt="International Space Station" 
             fill
             className="hero-image"

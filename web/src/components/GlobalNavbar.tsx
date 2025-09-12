@@ -35,7 +35,7 @@ export default function GlobalNavbar() {
             <Link href="/" className="flex items-center space-x-2 shrink-0">
               <div className="w-6 h-6 rounded-full overflow-hidden">
                 <Image
-                  src="/images/iss_icon.png"
+                  src="/api/images/iss_icon.png"
                   alt="ISS Icon"
                   width={24}
                   height={24}

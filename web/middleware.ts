@@ -2,18 +2,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  // Intercept requests to /images/* and redirect to API route
-  if (request.nextUrl.pathname.startsWith('/images/')) {
-    const filename = request.nextUrl.pathname.split('/images/')[1]
-    return NextResponse.rewrite(new URL(`/api/images/${filename}`, request.url))
-  }
-
-  // Intercept requests to /data/* and redirect to API route
-  if (request.nextUrl.pathname.startsWith('/data/')) {
-    const filename = request.nextUrl.pathname.split('/data/')[1]
-    return NextResponse.rewrite(new URL(`/api/data/${filename}`, request.url))
-  }
-
   const response = NextResponse.next()
 
   // Add security headers for better Core Web Vitals
@@ -23,12 +11,12 @@ export function middleware(request: NextRequest) {
   response.headers.set('X-Content-Type-Options', 'nosniff')
   response.headers.set('Referrer-Policy', 'origin-when-cross-origin')
   
-  // Add performance hints
+  // Add performance hints for API routes
   response.headers.set(
     'Link', 
-    '</data/real_metrics.json>; rel=preload; as=fetch; crossorigin=anonymous, ' +
-    '</data/aggregated_stats.json>; rel=preload; as=fetch; crossorigin=anonymous, ' +
-    '</data/model_metadata.json>; rel=preload; as=fetch; crossorigin=anonymous'
+    '</api/data/real_metrics.json>; rel=preload; as=fetch; crossorigin=anonymous, ' +
+    '</api/data/aggregated_stats.json>; rel=preload; as=fetch; crossorigin=anonymous, ' +
+    '</api/data/model_metadata.json>; rel=preload; as=fetch; crossorigin=anonymous'
   )
 
   // Cache static assets

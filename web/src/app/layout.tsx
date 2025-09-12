@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   keywords: 'ISS, International Space Station, NASA, LSDA, crew health, space medicine, astronaut health, space mission analysis, health monitoring, space exploration',
   authors: [{ name: 'ISS Health Analytics Team' }],
   icons: {
-    icon: '/images/iss_icon.png',
-    shortcut: '/images/iss_icon.png',
+    icon: '/api/images/iss_icon.png',
+    shortcut: '/api/images/iss_icon.png',
     apple: '/images/iss_icon.png',
   },
   openGraph: {
