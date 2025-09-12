@@ -177,7 +177,7 @@ export const messages = {
     "methodology": "Methodology",
     "privacyPolicy": "Privacy Policy",
     "contact": "Contact",
-    "copyright": "Copyright"
+    "copyright": "© 2025 Alfonso Cifuentes Alonso. All rights reserved."
   },
   "simulators": {
     "backHome": "Back Home",

@@ -1,3 +1,11 @@
+# 🚀 ISS Crew Health Analysis - Web Dashboard
+
+> Next.js web application for advanced ISS crew health monitoring and analysis
+
+## Author
+
+**Alfonso Cifuentes Alonso** - *© 2025 All rights reserved*
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

@@ -2,6 +2,9 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "author": "Alfonso Cifuentes Alonso",
+  "description": "ISS Crew Health Analysis - Advanced AI-powered health monitoring dashboard for space missions",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack",
     "prebuild": "node scripts/prebuild.js",

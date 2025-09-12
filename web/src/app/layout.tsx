@@ -1,3 +1,10 @@
+/**
+ * ISS Crew Health Analysis - Root Layout
+ * 
+ * Author: Alfonso Cifuentes Alonso
+ * Copyright (c) 2025 Alfonso Cifuentes Alonso. All rights reserved.
+ * License: MIT
+ */
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -23,7 +30,9 @@ export const metadata: Metadata = {
   title: 'ISS Crew Health Analysis | NASA LSDA Data Insights',
   description: 'Comprehensive analysis of International Space Station crew health data using NASA LSDA datasets. Explore health metrics, mission types, crew roles, and predictive modeling for future space missions.',
   keywords: 'ISS, International Space Station, NASA, LSDA, crew health, space medicine, astronaut health, space mission analysis, health monitoring, space exploration',
-  authors: [{ name: 'ISS Health Analytics Team' }],
+  authors: [{ name: 'Alfonso Cifuentes Alonso' }],
+  creator: 'Alfonso Cifuentes Alonso',
+  publisher: 'Alfonso Cifuentes Alonso',
   icons: {
     icon: '/images/iss_icon.png',
     shortcut: '/images/iss_icon.png',

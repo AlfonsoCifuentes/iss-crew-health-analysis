@@ -1,6 +1,13 @@
 """
-Main Analysis Pipeline for ISS Crew Health Analysis
-Orchestrates the complete data science workflow
+ISS Crew Health Analysis - Main Pipeline
+Advanced AI-powered health monitoring system for International Space Station missions
+
+Author: Alfonso Cifuentes Alonso
+Copyright (c) 2025 Alfonso Cifuentes Alonso. All rights reserved.
+License: MIT
+
+This module orchestrates the complete data science workflow for analyzing
+ISS crew health data using real NASA LSDA datasets.
 """
 
 import pandas as pd
