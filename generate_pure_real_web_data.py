@@ -49,6 +49,16 @@ def generate_aggregated_stats(profiles_df, bone_df):
     iqr = q75 - q25
     outliers = bone_values[(bone_values < q25 - 1.5*iqr) | (bone_values > q75 + 1.5*iqr)]
     
+    # Real crew role distribution from actual data
+    crew_role_counts = profiles_df['crew_type'].value_counts().to_dict()
+    # Convert to standard crew role codes for compatibility
+    crew_roles = {
+        "CDR": crew_role_counts.get("Astronaut", 0),  # Commander/Astronaut
+        "PLT": crew_role_counts.get("Cosmonaut", 0),  # Pilot/Cosmonaut
+        "MS": 0,  # Mission Specialist (not in our real data)
+        "FE": 0   # Flight Engineer (not in our real data)
+    }
+    
     stats = {
         "key_metrics": {
             "total_crew_members": len(profiles_df),
@@ -62,6 +72,7 @@ def generate_aggregated_stats(profiles_df, bone_df):
             "ISS_Expedition_standard": int(standard_missions), 
             "ISS_Expedition_long": int(long_missions)
         },
+        "crew_roles": crew_roles,
         "correlations": {
             "bone_muscle_correlation": round(float(bone_muscle_corr), 2)
         },

@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Clock, TrendingUp, AlertTriangle } from 'lucide-react';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 interface StatsOverviewProps {
   stats: {
@@ -14,6 +15,8 @@ interface StatsOverviewProps {
 }
 
 export default function StatsOverview({ stats }: StatsOverviewProps) {
+  const { t } = useTranslation();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -62,8 +65,8 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
         <div className="text-3xl font-bold text-cosmic-white mb-2">
           {stats.total_crew_members}
         </div>
-        <div className="text-cosmic-white/70 text-sm">Total Crew Members</div>
-        <div className="text-xs text-blue-400 mt-2">Active in Analysis</div>
+        <div className="text-cosmic-white/70 text-sm">{t('dashboard.totalCrewMembers')}</div>
+        <div className="text-xs text-blue-400 mt-2">{t('dashboard.activeInAnalysis')}</div>
       </motion.div>
 
       <motion.div
@@ -75,8 +78,8 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
         <div className="text-3xl font-bold text-cosmic-white mb-2">
           {formatDuration(stats.avg_mission_duration)}
         </div>
-        <div className="text-cosmic-white/70 text-sm">Average Mission Duration</div>
-        <div className="text-xs text-yellow-400 mt-2">Normalized Data</div>
+        <div className="text-cosmic-white/70 text-sm">{t('dashboard.averageMissionDuration')}</div>
+        <div className="text-xs text-yellow-400 mt-2">{t('dashboard.normalizedData')}</div>
       </motion.div>
 
       <motion.div
@@ -88,8 +91,8 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
         <div className="text-3xl font-bold text-cosmic-white mb-2">
           {formatAge(stats.avg_age)}
         </div>
-        <div className="text-cosmic-white/70 text-sm">Average Crew Age</div>
-        <div className="text-xs text-blue-400 mt-2">At Mission Start</div>
+        <div className="text-cosmic-white/70 text-sm">{t('dashboard.averageCrewAge')}</div>
+        <div className="text-xs text-blue-400 mt-2">{t('dashboard.atMissionStart')}</div>
       </motion.div>
 
       <motion.div
@@ -101,8 +104,8 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
         <div className="text-3xl font-bold text-cosmic-white mb-2">
           {Math.round(stats.outlier_percentage)}%
         </div>
-        <div className="text-cosmic-white/70 text-sm">Outlier Detection</div>
-        <div className="text-xs text-yellow-400 mt-2">Statistical Analysis</div>
+        <div className="text-cosmic-white/70 text-sm">{t('dashboard.outlierDetection')}</div>
+        <div className="text-xs text-yellow-400 mt-2">{t('dashboard.statisticalAnalysis')}</div>
       </motion.div>
     </motion.div>
   );

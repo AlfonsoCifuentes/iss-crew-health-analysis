@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Rocket, Calculator, Brain, Target, TrendingDown, AlertTriangle } from 'lucide-react';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 // Import model data for predictions
 import modelMetadata from '@/data/model_metadata.json';
@@ -14,6 +15,7 @@ interface RealMetrics {
 }
 
 export default function SimulatorsPage() {
+  const { t } = useTranslation();
   const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
   
   useEffect(() => {
@@ -33,15 +35,14 @@ export default function SimulatorsPage() {
             className="inline-flex items-center space-x-2 text-cosmic-white/70 hover:text-cosmic-white transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
+            <span>{t('simulators.backHome')}</span>
           </Link>
           
           <h1 className="text-4xl md:text-6xl font-bold text-cosmic-white mb-4 font-orbitron">
-            Mission Simulators
+            {t('simulators.title')}
           </h1>
           <p className="text-xl text-cosmic-white/80 max-w-4xl">
-            Advanced predictive modeling tools powered by machine learning to simulate 
-            long-duration Mars missions and analyze crew health outcomes using NASA LSDA data.
+            {t('simulators.subtitle')}
           </p>
         </div>
 
@@ -50,44 +51,44 @@ export default function SimulatorsPage() {
           <div className="card-cosmic p-8 interactive-glow">
             <div className="flex items-center space-x-3 mb-6">
               <Brain className="w-8 h-8 text-yellow-400" />
-              <h2 className="text-3xl font-bold text-star-gold font-orbitron">Algorithm Status</h2>
+              <h2 className="text-3xl font-bold text-star-gold font-orbitron">{t('simulators.algorithmStatus')}</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="text-center p-4 rounded-lg bg-cosmic-white/5">
+                <div className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-2">
                   1
                 </div>
-                <div className="text-cosmic-white/70">ML Model Active</div>
-                <div className="text-sm text-cosmic-white/50 mt-1">
-                  🎯 Production Ready
+                <div className="text-sm sm:text-base text-cosmic-white/70">{t('simulators.mlModelActive')}</div>
+                <div className="text-xs sm:text-sm text-cosmic-white/50 mt-1">
+                  {t('simulators.productionReady')}
                 </div>
               </div>
               
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">
+              <div className="text-center p-4 rounded-lg bg-cosmic-white/5">
+                <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-2">
                   5
                 </div>
-                <div className="text-cosmic-white/70">Research Algorithms</div>
-                <div className="text-sm text-cosmic-white/50 mt-1">
-                  Validated & Active
+                <div className="text-sm sm:text-base text-cosmic-white/70">{t('simulators.researchAlgorithms')}</div>
+                <div className="text-xs sm:text-sm text-cosmic-white/50 mt-1">
+                  {t('simulators.validatedActive')}
                 </div>
               </div>
               
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">
+              <div className="text-center p-4 rounded-lg bg-cosmic-white/5">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-400 mb-2">
                   {new Date(modelMetadata.model_info.training_date).toLocaleDateString()}
                 </div>
-                <div className="text-cosmic-white/70">Last Model Update</div>
+                <div className="text-sm sm:text-base text-cosmic-white/70">{t('simulators.lastModelUpdate')}</div>
               </div>
               
-              <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">
+              <div className="text-center p-4 rounded-lg bg-cosmic-white/5">
+                <div className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-2">
                   {realMetrics?.simulators_page.ml_model_accuracy_percent || '84.0'}%
                 </div>
-                <div className="text-cosmic-white/70">ML Model Accuracy</div>
-                <div className="text-sm text-cosmic-white/50 mt-1">
-                  R² Score (Bone Density)
+                <div className="text-sm sm:text-base text-cosmic-white/70">{t('simulators.mlModelAccuracy')}</div>
+                <div className="text-xs sm:text-sm text-cosmic-white/50 mt-1">
+                  {t('simulators.r2Score')}
                 </div>
               </div>
             </div>
@@ -97,7 +98,7 @@ export default function SimulatorsPage() {
         {/* ML Model + Research Algorithms Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-cosmic-white mb-8 text-center font-orbitron">
-            Active Prediction Models
+            {t('simulators.activePredictionModels')}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -108,22 +109,22 @@ export default function SimulatorsPage() {
                   <Brain className="w-6 h-6 text-yellow-400" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-cosmic-white font-orbitron">ML Model</h3>
-                  <div className="text-xs text-yellow-400">🎯 ACTIVE</div>
+                  <h3 className="text-lg font-bold text-cosmic-white font-orbitron">{t('simulators.mlModel')}</h3>
+                  <div className="text-xs text-yellow-400">🎯 {t('simulators.active')}</div>
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90 text-sm">Bone Density Prediction</span>
-                  <span className="text-yellow-400 font-mono text-sm">Random Forest</span>
+                  <span className="text-cosmic-white/90 text-sm">{t('simulators.boneDensityPrediction')}</span>
+                  <span className="text-yellow-400 font-mono text-sm">{t('simulators.randomForest')}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90 text-sm">Accuracy (R² Score)</span>
+                  <span className="text-cosmic-white/90 text-sm">{t('simulators.accuracy')} ({t('simulators.r2ScoreLabel')})</span>
                   <span className="text-yellow-400 font-mono text-sm">94.73%</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90 text-sm">Training Data</span>
-                  <span className="text-yellow-400 font-mono text-sm">120 samples</span>
+                  <span className="text-cosmic-white/90 text-sm">{t('simulators.trainingData')}</span>
+                  <span className="text-yellow-400 font-mono text-sm">120 {t('simulators.samples')}</span>
                 </div>
               </div>
             </div>
@@ -135,22 +136,22 @@ export default function SimulatorsPage() {
                   <Calculator className="w-6 h-6 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-cosmic-white font-orbitron">Research Algorithms</h3>
-                  <div className="text-xs text-blue-400">📚 VALIDATED</div>
+                  <h3 className="text-lg font-bold text-cosmic-white font-orbitron">{t('simulators.researchAlgorithms')}</h3>
+                  <div className="text-xs text-blue-400">📚 {t('simulators.validated')}</div>
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90 text-sm">Muscle Mass Degradation</span>
-                  <span className="text-blue-400 font-mono text-sm">Literature-based</span>
+                  <span className="text-cosmic-white/90 text-sm">{t('simulators.muscleMassDegradation')}</span>
+                  <span className="text-blue-400 font-mono text-sm">{t('simulators.literatureBased')}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90 text-sm">Cardiovascular Risk</span>
-                  <span className="text-blue-400 font-mono text-sm">ISS Studies</span>
+                  <span className="text-cosmic-white/90 text-sm">{t('simulators.cardiovascularRisk')}</span>
+                  <span className="text-blue-400 font-mono text-sm">{t('simulators.issStudies')}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90 text-sm">Psychological Impact</span>
-                  <span className="text-blue-400 font-mono text-sm">Isolation Research</span>
+                  <span className="text-cosmic-white/90 text-sm">{t('simulators.psychologicalImpact')}</span>
+                  <span className="text-blue-400 font-mono text-sm">{t('simulators.isolationResearch')}</span>
                 </div>
               </div>
             </div>
@@ -159,23 +160,23 @@ export default function SimulatorsPage() {
           <div className="bg-gradient-to-r from-yellow-400/10 to-blue-400/10 p-6 rounded-lg mt-8">
             <div className="text-center">
               <h4 className="text-xl font-bold text-cosmic-white mb-4 font-orbitron">
-                ✅ Hybrid Prediction System Active
+                {t('simulators.hybridPredictionSystem')}
               </h4>
               <p className="text-cosmic-white/80 text-sm mb-4">
-                Our API combines trained ML models with validated research algorithms for comprehensive health predictions
+                {t('simulators.hybridDescription')}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div className="text-center">
-                  <div className="text-yellow-400 font-bold">ML Model</div>
-                  <div className="text-cosmic-white/60">Bone density changes</div>
+                  <div className="text-yellow-400 font-bold">{t('simulators.mlModel')}</div>
+                  <div className="text-cosmic-white/60">{t('simulators.boneDensityChanges')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-blue-400 font-bold">Research Algorithms</div>
-                  <div className="text-cosmic-white/60">Muscle, cardio, psychology</div>
+                  <div className="text-blue-400 font-bold">{t('simulators.researchAlgorithms')}</div>
+                  <div className="text-cosmic-white/60">{t('simulators.muscleCardioxPsychology')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-yellow-400 font-bold">Fallback Strategy</div>
-                  <div className="text-cosmic-white/60">Research-based if ML fails</div>
+                  <div className="text-yellow-400 font-bold">{t('simulators.fallbackStrategy')}</div>
+                  <div className="text-cosmic-white/60">{t('simulators.researchBasedFallback')}</div>
                 </div>
               </div>
             </div>
@@ -190,46 +191,45 @@ export default function SimulatorsPage() {
             <div className="card-cosmic p-8 interactive-glow">
               <div className="flex items-center space-x-3 mb-6">
                 <Rocket className="w-8 h-8 text-yellow-400" />
-                <h3 className="text-2xl font-bold text-cosmic-white">Mars Mission Predictor</h3>
+                <h3 className="text-2xl font-bold text-cosmic-white">{t('simulators.marsMissionPredictor')}</h3>
               </div>
               
               <p className="text-cosmic-white/80 mb-8">
-                Simulate long-duration Mars missions (500-900 days) and predict crew health outcomes 
-                based on historical ISS data and advanced machine learning models.
+                {t('simulators.marsPredictorDescription')}
               </p>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center justify-between p-4 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90">Mission Duration</span>
-                  <span className="text-nebula-cyan font-mono">500-900 days</span>
+                  <span className="text-cosmic-white/90">{t('simulators.missionDuration')}</span>
+                  <span className="text-nebula-cyan font-mono">{t('simulators.missionDurationValue')}</span>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90">Health Metrics</span>
-                  <span className="text-star-gold font-mono">15+ parameters</span>
+                  <span className="text-cosmic-white/90">{t('simulators.healthMetrics')}</span>
+                  <span className="text-star-gold font-mono">{t('simulators.healthMetricsValue')}</span>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90">Risk Analysis</span>
-                  <span className="text-nebula-purple font-mono">Multi-factor</span>
+                  <span className="text-cosmic-white/90">{t('simulators.riskAnalysis')}</span>
+                  <span className="text-nebula-purple font-mono">{t('simulators.riskAnalysisValue')}</span>
                 </div>
               </div>
               
               <div className="bg-gradient-to-r from-nebula-purple/10 to-star-gold/10 p-6 rounded-lg mb-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <Target className="w-6 h-6 text-yellow-400" />
-                  <h4 className="text-lg font-semibold text-cosmic-white">Key Predictions</h4>
+                  <h4 className="text-lg font-semibold text-cosmic-white">{t('simulators.keyPredictions')}</h4>
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <TrendingDown className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm text-cosmic-white/80">Bone density loss projection</span>
+                    <span className="text-sm text-cosmic-white/80">{t('simulators.boneDensityLossProjection')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <TrendingDown className="w-4 h-4 text-yellow-400" />
-                    <span className="text-sm text-cosmic-white/80">Muscle mass deterioration</span>
+                    <span className="text-sm text-cosmic-white/80">{t('simulators.muscleMassDeterioration')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <AlertTriangle className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm text-cosmic-white/80">Cardiovascular risk assessment</span>
+                    <span className="text-sm text-cosmic-white/80">{t('simulators.cardiovascularRiskAssessment')}</span>
                   </div>
                 </div>
               </div>
@@ -239,7 +239,7 @@ export default function SimulatorsPage() {
                 className="btn-cosmic w-full justify-center inline-flex items-center space-x-2"
               >
                 <Rocket className="w-5 h-5" />
-                <span>Launch Mars Simulator</span>
+                <span>{t('simulators.launchMarsSimulator')}</span>
               </Link>
             </div>
 
@@ -247,46 +247,45 @@ export default function SimulatorsPage() {
             <div className="card-cosmic p-8 interactive-glow">
               <div className="flex items-center space-x-3 mb-6">
                 <Calculator className="w-8 h-8 text-blue-400" />
-                <h3 className="text-2xl font-bold text-cosmic-white">Health Risk Calculator</h3>
+                <h3 className="text-2xl font-bold text-cosmic-white">{t('simulators.healthRiskCalculator')}</h3>
               </div>
               
               <p className="text-cosmic-white/80 mb-8">
-                Advanced risk assessment tool that analyzes crew member profiles and predicts 
-                health complications for various mission scenarios.
+                {t('simulators.riskCalculatorDescription')}
               </p>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center justify-between p-4 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90">Risk Factors</span>
-                  <span className="text-blue-400 font-mono">25+ variables</span>
+                  <span className="text-cosmic-white/90">{t('simulators.riskFactors')}</span>
+                  <span className="text-blue-400 font-mono">{t('simulators.riskFactorsValue')}</span>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90">Accuracy Rate</span>
-                  <span className="text-yellow-400 font-mono">94.7%</span>
+                  <span className="text-cosmic-white/90">{t('simulators.accuracyRate')}</span>
+                  <span className="text-yellow-400 font-mono">{t('simulators.accuracyRateValue')}</span>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-space-deep/30 rounded-lg">
-                  <span className="text-cosmic-white/90">Scenarios</span>
-                  <span className="text-blue-400 font-mono">Multiple</span>
+                  <span className="text-cosmic-white/90">{t('simulators.scenarios')}</span>
+                  <span className="text-blue-400 font-mono">{t('simulators.scenariosValue')}</span>
                 </div>
               </div>
               
               <div className="bg-gradient-to-r from-blue-400/10 to-yellow-400/10 p-6 rounded-lg mb-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <AlertTriangle className="w-6 h-6 text-yellow-400" />
-                  <h4 className="text-lg font-semibold text-cosmic-white">Assessment Areas</h4>
+                  <h4 className="text-lg font-semibold text-cosmic-white">{t('simulators.assessmentAreas')}</h4>
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-nebula-cyan rounded-full"></div>
-                    <span className="text-sm text-cosmic-white/80">Individual crew risk profiles</span>
+                    <span className="text-sm text-cosmic-white/80">{t('simulators.individualCrewRisk')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-star-gold rounded-full"></div>
-                    <span className="text-sm text-cosmic-white/80">Mission-specific adaptations</span>
+                    <span className="text-sm text-cosmic-white/80">{t('simulators.missionSpecificAdaptations')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-nebula-purple rounded-full"></div>
-                    <span className="text-sm text-cosmic-white/80">Countermeasure effectiveness</span>
+                    <span className="text-sm text-cosmic-white/80">{t('simulators.countermeasureEffectiveness')}</span>
                   </div>
                 </div>
               </div>
@@ -296,7 +295,7 @@ export default function SimulatorsPage() {
                 className="btn-outline-cosmic w-full justify-center inline-flex items-center space-x-2"
               >
                 <Calculator className="w-5 h-5" />
-                <span>Open Risk Calculator</span>
+                <span>{t('simulators.openRiskCalculator')}</span>
               </Link>
             </div>
           </div>
@@ -305,7 +304,7 @@ export default function SimulatorsPage() {
         {/* Features Section */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-cosmic-white mb-8 text-center font-orbitron">
-            Advanced Simulation Features
+            {t('simulators.advancedSimulationFeatures')}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -313,9 +312,9 @@ export default function SimulatorsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-nebula-purple to-star-gold rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Brain className="w-8 h-8 text-cosmic-white" />
               </div>
-              <h3 className="text-xl font-bold text-cosmic-white mb-3">Research-Based Algorithms</h3>
+              <h3 className="text-xl font-bold text-cosmic-white mb-3">{t('simulators.researchBasedAlgorithms')}</h3>
               <p className="text-cosmic-white/70">
-                Validated algorithms based on NASA studies and space medicine research
+                {t('simulators.researchAlgorithmsDescription')}
               </p>
             </div>
             
@@ -323,9 +322,9 @@ export default function SimulatorsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-nebula-cyan to-nebula-purple rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Target className="w-8 h-8 text-cosmic-white" />
               </div>
-              <h3 className="text-xl font-bold text-cosmic-white mb-3">Scientific Accuracy</h3>
+              <h3 className="text-xl font-bold text-cosmic-white mb-3">{t('simulators.scientificAccuracy')}</h3>
               <p className="text-cosmic-white/70">
-                Predictions based on peer-reviewed literature and validated research findings
+                {t('simulators.scientificAccuracyDescription')}
               </p>
             </div>
             
@@ -333,9 +332,9 @@ export default function SimulatorsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-star-gold to-nebula-pink rounded-full mx-auto mb-4 flex items-center justify-center">
                 <Calculator className="w-8 h-8 text-cosmic-white" />
               </div>
-              <h3 className="text-xl font-bold text-cosmic-white mb-3">Real-time Analysis</h3>
+              <h3 className="text-xl font-bold text-cosmic-white mb-3">{t('simulators.realtimeAnalysis')}</h3>
               <p className="text-cosmic-white/70">
-                Interactive simulations with instant results and detailed health impact analysis
+                {t('simulators.realtimeAnalysisDescription')}
               </p>
             </div>
           </div>
@@ -345,18 +344,17 @@ export default function SimulatorsPage() {
         <section className="text-center">
           <div className="card-cosmic p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-star-gold mb-4">
-              Ready to Explore the Future of Space Medicine?
+              {t('simulators.readyToExplore')}
             </h3>
             <p className="text-cosmic-white/80 mb-6">
-              Use our advanced simulators to predict health outcomes for future Mars missions 
-              and contribute to the future of human space exploration.
+              {t('simulators.readyToExploreDescription')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/dashboard" className="btn-cosmic">
-                View Data Dashboard
+                {t('simulators.viewDataDashboard')}
               </Link>
               <Link href="/astronauts" className="btn-outline-cosmic">
-                Explore Crew Profiles
+                {t('simulators.exploreCrewProfiles')}
               </Link>
             </div>
           </div>

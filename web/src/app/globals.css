@@ -85,18 +85,27 @@ body {
 
 /* Card styles */
 .card-cosmic {
-  background: rgb(116 174 224 / 0.1);
+  background: rgb(116 174 224 / 0.15);
   backdrop-filter: blur(8px);
-  border: 1px solid rgb(237 205 78 / 0.2);
+  border: 1px solid rgb(237 205 78 / 0.3);
   border-radius: 0.75rem;
   box-shadow: 0 25px 50px -12px rgba(116, 174, 224, 0.25);
 }
 
 .card-glass {
-  background: rgb(237 245 252 / 0.05);
+  background: rgb(237 245 252 / 0.08);
   backdrop-filter: blur(8px);
-  border: 1px solid rgb(237 245 252 / 0.1);
+  border: 1px solid rgb(237 245 252 / 0.15);
   border-radius: 0.75rem;
+}
+
+/* Modal-specific style for better readability */
+.modal-cosmic {
+  background: rgb(0 0 0 / 0.85);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgb(237 205 78 / 0.4);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(237, 205, 78, 0.4);
 }
 
 /* Text gradient effects */

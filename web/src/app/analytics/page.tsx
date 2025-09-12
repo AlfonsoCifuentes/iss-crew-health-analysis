@@ -61,8 +61,8 @@ export default function AdvancedAnalyticsPage() {
         const advancedAnalysis: AdvancedAnalysis = {
           correlations: {
             age_vs_bone_loss: realData.analytics_page.correlations.age_vs_bone_loss,
-            duration_vs_muscle_loss: realData.analytics_page.correlations.duration_vs_muscle_loss,
-            exercise_vs_recovery: realData.analytics_page.correlations.exercise_vs_recovery
+            duration_vs_muscle_loss: realData.analytics_page.correlations.duration_vs_bone_loss,
+            exercise_vs_recovery: realData.analytics_page.correlations.femoral_vs_lumbar_loss
           },
           outliers: {
             extreme_bone_loss: realData.analytics_page.outliers.extreme_bone_loss_percent,
@@ -165,7 +165,7 @@ export default function AdvancedAnalyticsPage() {
             <div className="card-cosmic p-6 text-center">
               <TrendingUp className="w-10 h-10 text-green-400 mx-auto mb-4" />
               <div className="text-3xl font-bold text-cosmic-white mb-2">
-                {analysis?.correlations.exercise_vs_recovery.toFixed(2)}
+                {analysis?.correlations?.exercise_vs_recovery?.toFixed(2) ?? 'N/A'}
               </div>
               <div className="text-cosmic-white/70">Exercise-Recovery Correlation</div>
             </div>

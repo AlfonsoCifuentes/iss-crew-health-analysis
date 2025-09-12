@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Activity, Heart, TrendingDown, TrendingUp, AlertTriangle } from 'lucide-react';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 interface MetricData {
   current: string;
@@ -40,6 +41,7 @@ interface RealTimeData {
 export default function RealTimeMetrics() {
   const [metrics, setMetrics] = useState<RealTimeData | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const fetchMetrics = async () => {
     try {
@@ -102,38 +104,38 @@ export default function RealTimeMetrics() {
   return (
     <div className="card-cosmic p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-bold text-cosmic-white">Real-Time Health Metrics</h3>
+        <h3 className="text-xl font-bold text-cosmic-white">{t('dashboard.realtimeHealthMetrics')}</h3>
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-sm text-cosmic-white/70">Live</span>
+          <span className="text-sm text-cosmic-white/70">{t('dashboard.live')}</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="text-center p-3 rounded-lg bg-space-deep/50">
           <div className="text-2xl font-bold text-yellow-400">{metrics.crew_status.total_crew}</div>
-          <div className="text-sm text-cosmic-white/70">Total Crew</div>
+          <div className="text-sm text-cosmic-white/70">{t('dashboard.totalCrew')}</div>
         </div>
         <div className="text-center p-3 rounded-lg bg-space-deep/50">
           <div className="text-2xl font-bold text-blue-400">{metrics.crew_status.active_missions}</div>
-          <div className="text-sm text-cosmic-white/70">Active Missions</div>
+          <div className="text-sm text-cosmic-white/70">{t('dashboard.activeMissions')}</div>
         </div>
         <div className="text-center p-3 rounded-lg bg-space-deep/50">
           <div className="text-2xl font-bold text-red-400">{metrics.crew_status.health_alerts}</div>
-          <div className="text-sm text-cosmic-white/70">Health Alerts</div>
+          <div className="text-sm text-cosmic-white/70">{t('dashboard.healthAlerts')}</div>
         </div>
         <div className="text-center p-4 rounded-lg bg-space-deep/50">
           <div className={`text-lg font-bold ${getStatusColor(metrics.crew_status.overall_status)} break-words leading-tight`}>
-            {metrics.crew_status.overall_status}
+            {metrics.crew_status.overall_status === 'Nominal' ? t('dashboard.nominal') : metrics.crew_status.overall_status}
           </div>
-          <div className="text-sm text-cosmic-white/70 mt-1">Overall Status</div>
+          <div className="text-sm text-cosmic-white/70 mt-1">{t('dashboard.overallStatus')}</div>
         </div>
       </div>
 
       <div className="space-y-4 mb-6">
         <h4 className="text-lg font-semibold text-cosmic-white flex items-center space-x-2">
           <Heart className="w-5 h-5 text-red-400" />
-          <span>Health Parameters</span>
+          <span>{t('dashboard.healthParameters')}</span>
         </h4>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -141,7 +143,11 @@ export default function RealTimeMetrics() {
             <div key={key} className="p-4 rounded-lg bg-space-deep/30 border border-space-deep/50">
               <div className="flex items-center justify-between mb-2">
                 <h5 className="text-sm font-medium text-cosmic-white capitalize">
-                  {key.replace('_', ' ')}
+                  {key === 'bone_density' ? t('dashboard.boneDensity') :
+                   key === 'muscle_mass' ? t('dashboard.muscleMass') :
+                   key === 'cardiovascular' ? t('dashboard.cardiovascularLower') :
+                   key === 'psychological' ? t('dashboard.psychologicalLower') :
+                   key.replace('_', ' ')}
                 </h5>
                 {getTrendIcon(metric.trend)}
               </div>
@@ -154,7 +160,8 @@ export default function RealTimeMetrics() {
                   metric.trend === 'improving' ? 'text-green-400' : 
                   metric.trend === 'declining' ? 'text-red-400' : 'text-cosmic-white'
                 }`}>
-                  {metric.trend}
+                  {metric.trend === 'declining' ? t('dashboard.declining') : 
+                   metric.trend === 'stable' ? t('dashboard.stable') : metric.trend}
                 </div>
               </div>
             </div>
@@ -166,7 +173,7 @@ export default function RealTimeMetrics() {
         <div className="mb-6">
           <h4 className="text-lg font-semibold text-cosmic-white flex items-center space-x-2 mb-3">
             <AlertTriangle className="w-5 h-5 text-yellow-400" />
-            <span>Active Alerts</span>
+            <span>{t('dashboard.activeAlerts')}</span>
           </h4>
           <div className="space-y-2">
             {metrics.alerts.map((alert) => (
@@ -188,11 +195,11 @@ export default function RealTimeMetrics() {
 
       <div className="border-t border-space-deep/50 pt-4">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-cosmic-white/70">Data Quality: {metrics.system_status.data_quality}</span>
+          <span className="text-cosmic-white/70">{t('dashboard.dataQuality')}: {metrics.system_status.data_quality}</span>
           <span className="text-cosmic-white/70">
-            Last Update: {new Date(metrics.system_status.last_update).toLocaleTimeString()}
+            {t('dashboard.lastUpdate')}: {new Date(metrics.system_status.last_update).toLocaleTimeString()}
           </span>
-          <span className="text-green-400">{metrics.system_status.connection_status}</span>
+          <span className="text-green-400">{metrics.system_status.connection_status === 'Connected' ? t('dashboard.connected') : metrics.system_status.connection_status}</span>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
   Brain,
   CheckCircle
 } from 'lucide-react';
+import { useTranslation } from '@/contexts/LocaleContext';
 
 // Interfaces for type safety
 interface RiskFactor {
@@ -45,6 +46,7 @@ interface RealMetrics {
 }
 
 export default function RiskSimulatorPage() {
+  const { t } = useTranslation();
   const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
   
   useEffect(() => {
@@ -106,8 +108,8 @@ export default function RiskSimulatorPage() {
 
   // State for simulation
   const [selectedProfile, setSelectedProfile] = useState(missionProfiles[0]);
-  const [customDuration, setCustomDuration] = useState(selectedProfile.duration);
-  const [customCrewSize, setCustomCrewSize] = useState(selectedProfile.crewSize);
+  const [customDuration, setCustomDuration] = useState(selectedProfile?.duration || 180);
+  const [customCrewSize, setCustomCrewSize] = useState(selectedProfile?.crewSize || 3);
   const [results, setResults] = useState<SimulationResults | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
 
@@ -141,9 +143,9 @@ export default function RiskSimulatorPage() {
       
       // Generate recommendations based on risk factors
       const recommendations = [];
-      if (riskBreakdown[0].current > 10) recommendations.push('Enhanced bone density countermeasures required');
-      if (riskBreakdown[1].current > 15) recommendations.push('Increased resistance exercise protocol needed');
-      if (riskBreakdown[2].current > 12) recommendations.push('Cardiovascular monitoring and interventions essential');
+      if (riskBreakdown.length > 0 && riskBreakdown[0]!.current > 10) recommendations.push('Enhanced bone density countermeasures required');
+      if (riskBreakdown.length > 1 && riskBreakdown[1]!.current > 15) recommendations.push('Increased resistance exercise protocol needed');
+      if (riskBreakdown.length > 2 && riskBreakdown[2]!.current > 12) recommendations.push('Cardiovascular monitoring and interventions essential');
       if (customDuration > 400) recommendations.push('Consider staged mission approach for extended duration');
       if (customCrewSize < 4) recommendations.push('Minimum crew size of 4 recommended for redundancy');
       
@@ -172,15 +174,14 @@ export default function RiskSimulatorPage() {
             className="inline-flex items-center space-x-2 text-cosmic-white/70 hover:text-cosmic-white transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Simulators</span>
+            <span>{t('risk.backToSimulators')}</span>
           </Link>
           
           <h1 className="text-4xl md:text-6xl font-bold text-cosmic-white mb-4 font-orbitron">
-            Risk Assessment Simulator
+            {t('risk.title')}
           </h1>
           <p className="text-xl text-cosmic-white/80 max-w-4xl">
-            Comprehensive risk analysis tool using real NASA LSDA data to evaluate mission safety 
-            and crew health outcomes for various mission profiles and durations.
+            {t('risk.subtitle')}
           </p>
         </div>
 
@@ -242,7 +243,7 @@ export default function RiskSimulatorPage() {
                   setCustomCrewSize(profile.crewSize);
                 }}
                 className={`card-cosmic p-6 interactive-glow text-left transition-all duration-200 ${
-                  selectedProfile.id === profile.id ? 'ring-2 ring-yellow-400' : ''
+                  selectedProfile?.id === profile.id ? 'ring-2 ring-yellow-400' : ''
                 }`}
               >
                 <h3 className="font-bold text-cosmic-white mb-2">{profile.name}</h3>

@@ -27,9 +27,9 @@ interface AggregatedStats {
   };
   crew_roles: {
     CDR: number;
-    FE1: number;
-    FE2: number;
-    FE3: number;
+    PLT: number;
+    MS: number;
+    FE: number;
   };
   correlations: {
     bone_muscle_correlation: number;
@@ -99,7 +99,7 @@ export default function DashboardPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
             <TrendingUp className="w-8 h-8 text-yellow-400" />
-            <span>Mission Statistics</span>
+            <span>{t('dashboard.missionStatistics')}</span>
           </h2>
           <StatsOverview 
             stats={{
@@ -120,7 +120,7 @@ export default function DashboardPage() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div className="card-cosmic p-6">
-              <h3 className="text-xl font-semibold text-cosmic-white mb-4">Health Metrics Timeline</h3>
+              <h3 className="text-xl font-semibold text-cosmic-white mb-4">{t('dashboard.healthMetricsTimeline')}</h3>
               <HealthMetricsChart 
                 data={{
                   bone_density_change_avg: aggregatedStats.key_metrics.bone_density_change_avg,
@@ -129,13 +129,13 @@ export default function DashboardPage() {
               />
             </div>
             <div className="card-cosmic p-6">
-              <h3 className="text-xl font-semibold text-cosmic-white mb-4">Key Findings</h3>
+              <h3 className="text-xl font-semibold text-cosmic-white mb-4">{t('dashboard.keyFindings')}</h3>
               <ul className="space-y-3 text-cosmic-white/80">
                 <li>
-                  <span className="font-semibold text-yellow-400">Bone Density:</span> Average loss of {Math.abs(Math.round(aggregatedStats.key_metrics.bone_density_change_avg * 100 * 10) / 10)}% during spaceflight
+                  <span className="font-semibold text-yellow-400">{t('dashboard.boneHealth')}:</span> {t('dashboard.boneDensityLoss').replace('4.5', Math.abs(Math.round(aggregatedStats.key_metrics.bone_density_change_avg * 100 * 10) / 10).toString())}
                 </li>
                 <li>
-                  <span className="font-semibold text-blue-400">Muscle Mass:</span> Average loss of {Math.abs(Math.round(aggregatedStats.key_metrics.muscle_mass_change_avg * 100 * 10) / 10)}% in microgravity
+                  <span className="font-semibold text-blue-400">{t('dashboard.muscleHealth')}:</span> {t('dashboard.muscleMassLoss').replace('6.8', Math.abs(Math.round(aggregatedStats.key_metrics.muscle_mass_change_avg * 100 * 10) / 10).toString())}
                 </li>
               </ul>
             </div>
@@ -146,20 +146,20 @@ export default function DashboardPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
             <BarChart3 className="w-8 h-8 text-yellow-400" />
-            <span>Mission Types Distribution</span>
+            <span>{t('dashboard.missionTypesDistribution')}</span>
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="card-cosmic p-6">
               <MissionTypesChart data={aggregatedStats.mission_types} />
             </div>
             <div className="card-cosmic p-6">
-              <h3 className="text-xl font-semibold text-cosmic-white mb-4">Mission Insights</h3>
+              <h3 className="text-xl font-semibold text-cosmic-white mb-4">{t('dashboard.missionInsights')}</h3>
               <ul className="space-y-3 text-cosmic-white/80">
                 <li>
-                  <span className="font-semibold text-yellow-400">Total Missions:</span> {Object.values(aggregatedStats.mission_types).reduce((a: number, b: number) => a + b, 0)}
+                  <span className="font-semibold text-yellow-400">{t('dashboard.totalMissions')}:</span> {Object.values(aggregatedStats.mission_types).reduce((a: number, b: number) => a + b, 0)}
                 </li>
                 <li>
-                  <span className="font-semibold text-blue-400">Most Common:</span> Standard Expeditions ({aggregatedStats.mission_types.ISS_Expedition_standard} missions)
+                  <span className="font-semibold text-blue-400">{t('dashboard.mostCommon')}:</span> {t('dashboard.standardExpeditions')} ({aggregatedStats.mission_types.ISS_Expedition_standard} {t('dashboard.missions')})
                 </li>
               </ul>
             </div>
@@ -170,22 +170,22 @@ export default function DashboardPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
             <Users className="w-8 h-8 text-yellow-400" />
-            <span>Crew Roles & Leadership</span>
+            <span>{t('dashboard.crewRoles')}</span>
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="card-cosmic p-6">
               <CrewRolesChart 
-                data={aggregatedStats.crew_roles}
+                data={aggregatedStats.crew_roles || {}}
               />
             </div>
             <div className="card-cosmic p-6">
-              <h3 className="text-xl font-semibold text-cosmic-white mb-4">Role Distribution</h3>
+              <h3 className="text-xl font-semibold text-cosmic-white mb-4">{t('dashboard.roleDistribution')}</h3>
               <ul className="space-y-3 text-cosmic-white/80">
                 <li>
-                  <span className="font-semibold text-yellow-400">Total Roles:</span> {Object.values(aggregatedStats.crew_roles).reduce((a: number, b: number) => a + b, 0)} assignments
+                  <span className="font-semibold text-yellow-400">{t('dashboard.totalRoles')}:</span> {aggregatedStats.crew_roles ? Object.values(aggregatedStats.crew_roles).reduce((a: number, b: number) => a + b, 0) : 0} {t('dashboard.assignments')}
                 </li>
                 <li>
-                  <span className="font-semibold text-yellow-400">Most Common:</span> Mission Commander ({aggregatedStats.crew_roles.CDR} assignments)
+                  <span className="font-semibold text-yellow-400">{t('dashboard.mostCommon')}:</span> {t('dashboard.missionCommander')} ({aggregatedStats.crew_roles?.CDR || 0} {t('dashboard.assignments')})
                 </li>
               </ul>
             </div>
@@ -196,14 +196,14 @@ export default function DashboardPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
             <PieChart className="w-8 h-8 text-yellow-400" />
-            <span>Health Correlations</span>
+            <span>{t('dashboard.healthCorrelations')}</span>
           </h2>
           <div className="card-cosmic p-8">
             <div className="text-center mb-8">
               <div className="text-6xl font-bold text-blue-400 mb-2">
                 {Math.round(aggregatedStats.correlations.bone_muscle_correlation * 100)}%
               </div>
-              <div className="text-xl text-cosmic-white/80">Bone-Muscle Loss Correlation</div>
+              <div className="text-xl text-cosmic-white/80">{t('dashboard.boneMuscleCorrelation')}</div>
             </div>
             
             <div className="w-full bg-space-dark/50 rounded-full h-4 mb-6">
@@ -214,8 +214,7 @@ export default function DashboardPage() {
             </div>
 
             <p className="text-cosmic-white/80 text-center max-w-2xl mx-auto">
-              Strong correlation indicates that bone density and muscle mass changes occur together during spaceflight, 
-              suggesting shared physiological mechanisms in microgravity adaptation.
+              {t('dashboard.correlationDescription')}
             </p>
           </div>
         </section>
@@ -224,7 +223,7 @@ export default function DashboardPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-yellow-400 mb-8 flex items-center space-x-3 font-orbitron">
             <TrendingUp className="w-8 h-8 text-yellow-400" />
-            <span>Real-time Analysis</span>
+            <span>{t('dashboard.realtimeAnalysis')}</span>
           </h2>
           <RealTimeMetrics />
         </section>
@@ -232,17 +231,16 @@ export default function DashboardPage() {
         {/* Advanced Analysis CTA */}
         <section className="mb-16">
           <div className="card-cosmic p-8 text-center">
-            <h3 className="text-2xl font-bold text-cosmic-white mb-4">Explore Advanced Analysis</h3>
+            <h3 className="text-2xl font-bold text-cosmic-white mb-4">{t('dashboard.exploreAdvancedAnalysis')}</h3>
             <p className="text-cosmic-white/80 mb-6 max-w-2xl mx-auto">
-              Apply sophisticated filters to analyze specific subsets of NASA data. 
-              Filter by mission type, crew role, duration, and more to uncover detailed insights.
+              {t('dashboard.advancedAnalysisDescription')}
             </p>
             <Link 
               href="/analysis"
               className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-lg font-medium hover:bg-yellow-300 transition-colors"
             >
               <TrendingUp className="w-5 h-5" />
-              Advanced Analysis
+              {t('dashboard.advancedAnalysis')}
             </Link>
           </div>
         </section>

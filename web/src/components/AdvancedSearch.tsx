@@ -185,7 +185,7 @@ export default function AdvancedSearch() {
             type: 'metric',
             title: metric.title,
             description: metric.description,
-            value: metric.value,
+            value: metric.value || 0,
             category: metric.category,
             url: '/analytics'
           });
@@ -231,7 +231,7 @@ export default function AdvancedSearch() {
             type: 'mission',
             title: mission.title,
             description: mission.description,
-            value: mission.value,
+            value: mission.value || 0,
             category: mission.category,
             url: '/dashboard'
           });
