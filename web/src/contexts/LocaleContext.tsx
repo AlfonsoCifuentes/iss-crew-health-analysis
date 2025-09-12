@@ -1,6 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { messages as enMessages } from '@/data/messages/en';
+import { messages as esMessages } from '@/data/messages/es';
 
 type Locale = 'en' | 'es';
 
@@ -16,12 +18,19 @@ interface LocaleContextType {
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
+// Pre-loaded messages for better performance and reliability
+const messageMap = {
+  en: enMessages,
+  es: esMessages,
+} as const;
+
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('en');
-  const [messages, setMessages] = useState<Messages>({});
+  const [messages, setMessages] = useState<Messages>(messageMap.en);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
+    setMessages(messageMap[newLocale]);
     localStorage.setItem('locale', newLocale);
   };
 
@@ -30,29 +39,9 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     const savedLocale = localStorage.getItem('locale') as Locale;
     if (savedLocale && (savedLocale === 'en' || savedLocale === 'es')) {
       setLocaleState(savedLocale);
+      setMessages(messageMap[savedLocale]);
     }
   }, []);
-
-  useEffect(() => {
-    // Load messages for current locale
-    const loadMessages = async () => {
-      try {
-        const response = await fetch(`/messages/${locale}.json`);
-        const newMessages = await response.json();
-        setMessages(newMessages);
-      } catch (error) {
-        console.error('Error loading messages:', error);
-        // Fallback to English if error
-        if (locale !== 'en') {
-          const fallbackResponse = await fetch('/messages/en.json');
-          const fallbackMessages = await fallbackResponse.json();
-          setMessages(fallbackMessages);
-        }
-      }
-    };
-
-    loadMessages();
-  }, [locale]);
 
   return (
     <LocaleContext.Provider value={{ locale, setLocale, messages }}>
