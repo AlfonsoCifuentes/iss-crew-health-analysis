@@ -44,8 +44,8 @@ const nextConfig: NextConfig = {
     },
   },
   
-  // Output optimization
-  output: 'standalone',
+  // Output optimization - commented out for Vercel deployment
+  // output: 'standalone',
   
   // Headers for better caching and performance
   async headers() {

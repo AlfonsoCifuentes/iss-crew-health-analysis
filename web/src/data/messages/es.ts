@@ -41,7 +41,33 @@ export const messages = {
     "roleDistribution": "Distribución de Roles",
     "totalRoles": "Total de Roles",
     "assignments": "asignaciones",
-    "missionCommander": "Comandante de Misión"
+    "missionCommander": "Comandante de Misión",
+    "totalCrewMembers": "Total de Miembros de Tripulación",
+    "activeInAnalysis": "Activos en Análisis",
+    "averageMissionDuration": "Duración Promedio de Misión",
+    "normalizedData": "Datos Normalizados",
+    "averageCrewAge": "Edad Promedio de Tripulación",
+    "atMissionStart": "Al Inicio de la Misión",
+    "outlierDetection": "Detección de Valores Atípicos",
+    "statisticalAnalysis": "Análisis Estadístico",
+    "realtimeHealthMetrics": "Métricas de Salud en Tiempo Real",
+    "live": "EN VIVO",
+    "totalCrew": "Tripulación Total",
+    "healthAlerts": "Alertas de Salud",
+    "nominal": "Nominal",
+    "overallStatus": "Estado General",
+    "healthParameters": "Parámetros de Salud",
+    "boneDensity": "Densidad Ósea",
+    "muscleMass": "Masa Muscular",
+    "cardiovascularLower": "cardiovascular",
+    "psychologicalLower": "psicológico",
+    "declining": "Declinando",
+    "stable": "Estable",
+    "activeAlerts": "Alertas Activas",
+    "dataQuality": "Calidad de Datos",
+    "lastUpdate": "Última Actualización",
+    "connected": "Conectado",
+    "noCrewRoleData": "No hay datos de roles de tripulación disponibles"
   },
   "analysis": {
     "title": "Análisis de Salud de la Tripulación",
@@ -84,8 +110,19 @@ export const messages = {
     "viewLess": "Ver Menos"
   },
   "settings": {
+    "title": "Configuración",
     "language": "Idioma",
     "changeLanguage": "Cambiar Idioma"
+  },
+  "missionTypes": {
+    "shortDurationMission": "Misión de Duración Corta",
+    "longDurationMission": "Misión de Duración Larga",
+    "extendedDurationMission": "Misión de Duración Extendida"
+  },
+  "risk": {
+    "backToSimulators": "Volver a Simuladores",
+    "title": "Simulador de Evaluación de Riesgos",
+    "subtitle": "Predicciones Avanzadas de Riesgos de Salud para Misiones Espaciales"
   },
   "home": {
     "description": "Análisis avanzado de datos de métricas de salud de tripulación de misiones reales NASA LSDA, utilizando algoritmos de machine learning para predecir resultados de salud en vuelos espaciales de larga duración.",

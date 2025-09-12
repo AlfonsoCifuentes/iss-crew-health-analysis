@@ -41,7 +41,33 @@ export const messages = {
     "roleDistribution": "Role Distribution",
     "totalRoles": "Total Roles",
     "assignments": "assignments",
-    "missionCommander": "Mission Commander"
+    "missionCommander": "Mission Commander",
+    "totalCrewMembers": "Total Crew Members",
+    "activeInAnalysis": "Active in Analysis",
+    "averageMissionDuration": "Average Mission Duration",
+    "normalizedData": "Normalized Data",
+    "averageCrewAge": "Average Crew Age",
+    "atMissionStart": "At Mission Start",
+    "outlierDetection": "Outlier Detection",
+    "statisticalAnalysis": "Statistical Analysis",
+    "realtimeHealthMetrics": "Real-time Health Metrics",
+    "live": "LIVE",
+    "totalCrew": "Total Crew",
+    "healthAlerts": "Health Alerts",
+    "nominal": "Nominal",
+    "overallStatus": "Overall Status",
+    "healthParameters": "Health Parameters",
+    "boneDensity": "Bone Density",
+    "muscleMass": "Muscle Mass",
+    "cardiovascularLower": "cardiovascular",
+    "psychologicalLower": "psychological",
+    "declining": "Declining",
+    "stable": "Stable",
+    "activeAlerts": "Active Alerts",
+    "dataQuality": "Data Quality",
+    "lastUpdate": "Last Update",
+    "connected": "Connected",
+    "noCrewRoleData": "No crew role data available"
   },
   "analysis": {
     "title": "Crew Health Analysis",
@@ -84,8 +110,19 @@ export const messages = {
     "viewLess": "View Less"
   },
   "settings": {
+    "title": "Settings",
     "language": "Language",
     "changeLanguage": "Change Language"
+  },
+  "missionTypes": {
+    "shortDurationMission": "Short Duration Mission",
+    "longDurationMission": "Long Duration Mission", 
+    "extendedDurationMission": "Extended Duration Mission"
+  },
+  "risk": {
+    "backToSimulators": "Back to Simulators",
+    "title": "Risk Assessment Simulator",
+    "subtitle": "Advanced Health Risk Predictions for Space Missions"
   },
   "home": {
     "description": "Advanced data analysis of crew health metrics from real NASA LSDA missions, utilizing machine learning algorithms to predict health outcomes for long-duration spaceflight.",
