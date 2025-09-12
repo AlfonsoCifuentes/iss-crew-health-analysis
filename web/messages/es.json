@@ -5,6 +5,8 @@
     "analytics": "Analítica",
     "predictions": "Predicciones",
     "simulators": "Simuladores",
+    "astronauts": "Astronautas",
+    "reports": "Reportes",
     "search": "Buscar",
     "help": "Ayuda"
   },
@@ -22,7 +24,23 @@
     "psychological": "Psicológico",
     "keyInsights": "Puntos Clave",
     "criticalAlerts": "Alertas Críticas de Salud",
-    "recommendations": "Recomendaciones de IA"
+    "recommendations": "Recomendaciones de IA",
+    "missionStatistics": "Estadísticas de Misión",
+    "healthMetricsTimeline": "Línea de Tiempo de Métricas de Salud",
+    "keyFindings": "Hallazgos Clave",
+    "boneDensityLoss": "Pérdida promedio de densidad ósea del 4.5% observada durante las misiones",
+    "muscleMassLoss": "Reducción de masa muscular del 6.8% documentada en miembros de tripulación",
+    "missionTypesDistribution": "Distribución de Tipos de Misión",
+    "missionInsights": "Insights de Misión",
+    "totalMissions": "Total de Misiones",
+    "mostCommon": "Más Común",
+    "standardExpeditions": "Expediciones Estándar",
+    "missions": "misiones",
+    "crewRoles": "Roles de Tripulación",
+    "roleDistribution": "Distribución de Roles",
+    "totalRoles": "Total de Roles",
+    "assignments": "asignaciones",
+    "missionCommander": "Comandante de Misión"
   },
   "analysis": {
     "title": "Análisis de Salud de la Tripulación",
@@ -30,7 +48,25 @@
     "overallHealth": "Estado General de Salud",
     "detailedAnalysis": "Análisis Detallado",
     "filters": "Filtros",
-    "export": "Exportar Datos"
+    "export": "Exportar Datos",
+    "backToDashboard": "Volver al Panel",
+    "filteredAnalysis": "Análisis Filtrado",
+    "filteredAnalysisDescription": "Análisis basado en criterios de filtro actuales",
+    "activeFilters": "Filtros Activos",
+    "mission": "Misión",
+    "role": "Rol",
+    "country": "País",
+    "age": "Edad",
+    "years": "años",
+    "duration": "Duración",
+    "days": "días",
+    "realtimeStatistics": "Estadísticas en Tiempo Real",
+    "totalAstronauts": "Total de Astronautas",
+    "matchingCurrentFilters": "Que coinciden con filtros actuales",
+    "averageAge": "Edad Promedio",
+    "yearsAtMissionStart": "Años al inicio de la misión",
+    "averageDuration": "Duración Promedio",
+    "daysInSpace": "Días en el espacio"
   },
   "common": {
     "loading": "Cargando...",
@@ -49,5 +85,27 @@
   "settings": {
     "language": "Idioma",
     "changeLanguage": "Cambiar Idioma"
+  },
+  "simulators": {
+    "backHome": "Volver al Inicio",
+    "title": "Simuladores de Salud de Misión",
+    "subtitle": "Modelado Predictivo con Inteligencia Artificial para Salud de Tripulación",
+    "algorithmStatus": "Estado de Algoritmo",
+    "mlModelActive": "Modelo ML Activo",
+    "productionReady": "Listo para Producción",
+    "researchAlgorithms": "Algoritmos de Investigación",
+    "validatedActive": "Validado y Activo",
+    "lastModelUpdate": "Última Actualización del Modelo",
+    "mlModelAccuracy": "Precisión del Modelo ML",
+    "r2Score": "Puntuación R²: 0.87",
+    "activePredictionModels": "Modelos de Predicción Activos",
+    "mlModel": "Modelo ML",
+    "active": "Activo",
+    "boneDensityPrediction": "Predicción de Densidad Ósea",
+    "randomForest": "Bosque Aleatorio",
+    "accuracy": "Precisión",
+    "r2ScoreLabel": "Puntuación R²",
+    "trainingData": "Datos de Entrenamiento",
+    "samples": "muestras"
   }
 }

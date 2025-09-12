@@ -6,6 +6,8 @@ export const messages = {
     "analytics": "Analytics",
     "predictions": "Predictions",
     "simulators": "Simulators",
+    "astronauts": "Astronauts",
+    "reports": "Reports",
     "search": "Search",
     "help": "Help"
   },
@@ -23,7 +25,23 @@ export const messages = {
     "psychological": "Psychological",
     "keyInsights": "Key Insights",
     "criticalAlerts": "Critical Health Alerts",
-    "recommendations": "AI Recommendations"
+    "recommendations": "AI Recommendations",
+    "missionStatistics": "Mission Statistics",
+    "healthMetricsTimeline": "Health Metrics Timeline",
+    "keyFindings": "Key Findings",
+    "boneDensityLoss": "Average bone density loss of 4.5% observed during missions",
+    "muscleMassLoss": "Muscle mass reduction of 6.8% documented in crew members",
+    "missionTypesDistribution": "Mission Types Distribution",
+    "missionInsights": "Mission Insights",
+    "totalMissions": "Total Missions",
+    "mostCommon": "Most Common",
+    "standardExpeditions": "Standard Expeditions",
+    "missions": "missions",
+    "crewRoles": "Crew Roles",
+    "roleDistribution": "Role Distribution",
+    "totalRoles": "Total Roles",
+    "assignments": "assignments",
+    "missionCommander": "Mission Commander"
   },
   "analysis": {
     "title": "Crew Health Analysis",
@@ -31,7 +49,25 @@ export const messages = {
     "overallHealth": "Overall Health Status",
     "detailedAnalysis": "Detailed Analysis",
     "filters": "Filters",
-    "export": "Export Data"
+    "export": "Export Data",
+    "backToDashboard": "Back to Dashboard",
+    "filteredAnalysis": "Filtered Analysis",
+    "filteredAnalysisDescription": "Analysis based on current filter criteria",
+    "activeFilters": "Active Filters",
+    "mission": "Mission",
+    "role": "Role",
+    "country": "Country",
+    "age": "Age",
+    "years": "years",
+    "duration": "Duration",
+    "days": "days",
+    "realtimeStatistics": "Real-time Statistics",
+    "totalAstronauts": "Total Astronauts",
+    "matchingCurrentFilters": "Matching current filters",
+    "averageAge": "Average Age",
+    "yearsAtMissionStart": "Years at mission start",
+    "averageDuration": "Average Duration",
+    "daysInSpace": "Days in space"
   },
   "common": {
     "loading": "Loading...",
@@ -50,5 +86,27 @@ export const messages = {
   "settings": {
     "language": "Language",
     "changeLanguage": "Change Language"
+  },
+  "simulators": {
+    "backHome": "Back Home",
+    "title": "Mission Health Simulators",
+    "subtitle": "AI-Powered Predictive Modeling for Crew Health",
+    "algorithmStatus": "Algorithm Status",
+    "mlModelActive": "ML Model Active",
+    "productionReady": "Production Ready",
+    "researchAlgorithms": "Research Algorithms",
+    "validatedActive": "Validated & Active",
+    "lastModelUpdate": "Last Model Update",
+    "mlModelAccuracy": "ML Model Accuracy",
+    "r2Score": "R² Score: 0.87",
+    "activePredictionModels": "Active Prediction Models",
+    "mlModel": "ML Model",
+    "active": "Active",
+    "boneDensityPrediction": "Bone Density Prediction",
+    "randomForest": "Random Forest",
+    "accuracy": "Accuracy",
+    "r2ScoreLabel": "R² Score",
+    "trainingData": "Training Data",
+    "samples": "samples"
   }
 } as const;
