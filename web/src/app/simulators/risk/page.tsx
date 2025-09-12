@@ -50,7 +50,7 @@ export default function RiskSimulatorPage() {
   const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
   
   useEffect(() => {
-    fetch('/data/real_metrics.json')
+    fetch('/api/data/real_metrics.json')
       .then(res => res.json())
       .then(data => setRealMetrics(data))
       .catch(error => console.error('Error loading real metrics:', error));

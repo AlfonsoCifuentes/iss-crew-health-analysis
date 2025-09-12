@@ -41,7 +41,7 @@ export default function DashboardPage() {
   const [aggregatedStats, setAggregatedStats] = useState<AggregatedStats | null>(null);
   
   useEffect(() => {
-    fetch('/data/aggregated_stats.json')
+    fetch('/api/data/aggregated_stats.json')
       .then(res => res.json())
       .then(data => {
         setAggregatedStats(data);
