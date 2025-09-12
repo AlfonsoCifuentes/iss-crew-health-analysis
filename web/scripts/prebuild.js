@@ -29,4 +29,11 @@ if (fs.existsSync(dataDir)) {
   console.log('Data files found:', dataFiles);
 }
 
-console.log('✅ Pre-build verification complete');
+// Run embedding scripts
+console.log('🔄 Embedding images in API routes...');
+require('./embed-images.js');
+
+console.log('🔄 Embedding JSON data in API routes...');
+require('./embed-data.js');
+
+console.log('✅ Pre-build embedding complete');
