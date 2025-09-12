@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/react"; // TODO: Uncomment when enabled in Vercel
 import SpaceBackgroundWrapper from '@/components/SpaceBackgroundWrapper';
 import GlobalNavbar from '@/components/GlobalNavbar';
 import { LocaleProvider } from '@/contexts/LocaleContext';
@@ -103,7 +103,8 @@ export default function RootLayout({
         
         {/* Vercel Speed Insights & Analytics */}
         <SpeedInsights />
-        <Analytics />
+        {/* <Analytics /> */}
+        {/* TODO: Enable Analytics when Web Analytics is activated in Vercel project settings */}
       </body>
     </html>
   );

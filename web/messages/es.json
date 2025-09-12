@@ -102,6 +102,9 @@
     "accuracy": "Precisión",
     "r2ScoreLabel": "Puntuación R²",
     "trainingData": "Datos de Entrenamiento",
-    "samples": "muestras"
+    "samples": "muestras",
+    "exploreAdvancedAnalysis": "Explorar Análisis Avanzado",
+    "advancedAnalysisDescription": "Sumérgete en los patrones de salud de la tripulación, evaluaciones de riesgo e insights de misión usando análisis avanzados y modelos de aprendizaje automático.",
+    "advancedAnalysis": "Análisis Avanzado"
   }
 }
