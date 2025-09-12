@@ -74,9 +74,9 @@ export default function AdvancedSearch() {
     const loadSearchData = async () => {
       try {
         const [aggregatedRes, rawCrewRes, realMetricsRes] = await Promise.all([
-          fetch('/api/data/aggregated_stats.json'),
-          fetch('/api/data/raw_crew_data.json'),
-          fetch('/api/data/real_metrics.json')
+          fetch('/data/aggregated_stats.json'),
+          fetch('/data/raw_crew_data.json'),
+          fetch('/data/real_metrics.json')
         ]);
 
         const [aggregated, rawCrew, realMetrics] = await Promise.all([

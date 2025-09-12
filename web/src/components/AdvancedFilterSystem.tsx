@@ -86,7 +86,7 @@ export default function AdvancedFilterSystem({ onFilterChange, className = '' }:
   useEffect(() => {
     const loadCrewData = async () => {
       try {
-        const response = await fetch('/api/data/raw_crew_data.json');
+        const response = await fetch('/data/raw_crew_data.json');
         const data = await response.json();
         
         if (data.crew_profiles && Array.isArray(data.crew_profiles)) {
