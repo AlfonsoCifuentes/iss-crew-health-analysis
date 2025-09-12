@@ -1,33 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Users, User, Activity, Heart, TrendingDown, TrendingUp, Filter } from 'lucide-react';
 import AstronautComparisonSystem from '@/components/AstronautComparisonSystem';
-
-// Import crew data
-import crewHealthData from '@/data/crew_health_data.json';
-import aggregatedStats from '@/data/aggregated_stats.json';
-
-interface RealMetrics {
-  astronauts_page: {
-    health_metrics_count: number;
-    data_completeness_percent: number;
-  };
-}
+import { useRealMetrics, useAggregatedStats } from '@/hooks/useStaticData';
 
 export default function AstronautsPage() {
-  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
-  
-  useEffect(() => {
-    fetch('/data/real_metrics.json')
-      .then(res => res.json())
-      .then(data => setRealMetrics(data))
-      .catch(error => console.error('Error loading real metrics:', error));
-  }, []);
+  const realMetrics = useRealMetrics();
+  const aggregatedStats = useAggregatedStats();
 
   // Calculate some example crew statistics
-  const totalCrew = crewHealthData.total_astronauts;
+  const totalCrew = aggregatedStats.key_metrics.total_crew_members;
   const avgAge = Math.round(aggregatedStats.key_metrics.avg_age);
   
   return (

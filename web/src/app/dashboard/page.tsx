@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Brain, Users, TrendingUp, BarChart3, PieChart } from 'lucide-react';
 import StatsOverview from '@/components/StatsOverview';
@@ -11,60 +10,11 @@ import RealTimeMetrics from '@/components/RealTimeMetrics';
 import DataExportSystem from '@/components/DataExportSystem';
 import LanguageDemo from '@/components/LanguageDemo';
 import { useTranslation } from '@/contexts/LocaleContext';
-
-interface AggregatedStats {
-  key_metrics: {
-    total_crew_members: number;
-    avg_mission_duration: number;
-    avg_age: number;
-    bone_density_change_avg: number;
-    muscle_mass_change_avg: number;
-  };
-  mission_types: {
-    ISS_Expedition_standard: number;
-    ISS_Expedition_short: number;  
-    ISS_Expedition_long: number;
-  };
-  crew_roles: {
-    CDR: number;
-    PLT: number;
-    MS: number;
-    FE: number;
-  };
-  correlations: {
-    bone_muscle_correlation: number;
-  };
-  outlier_analysis: {
-    total_outliers: number;
-    outlier_percentage: number;
-  };
-}
+import { useAggregatedStats } from '@/hooks/useStaticData';
 
 export default function DashboardPage() {
-  const [aggregatedStats, setAggregatedStats] = useState<AggregatedStats | null>(null);
+  const aggregatedStats = useAggregatedStats();
   const { t } = useTranslation();
-  
-  useEffect(() => {
-    fetch('/data/aggregated_stats.json')
-      .then(res => res.json())
-      .then(data => {
-        setAggregatedStats(data);
-      })
-      .catch(error => {
-        console.error('Error loading dashboard data:', error);
-      });
-  }, []);
-
-  if (!aggregatedStats) {
-    return (
-      <main className="min-h-screen py-8 relative flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-yellow-400 mx-auto mb-4"></div>
-          <p className="text-cosmic-white/70">Loading real NASA data...</p>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen py-8 relative">

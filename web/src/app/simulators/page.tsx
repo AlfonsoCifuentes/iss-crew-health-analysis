@@ -1,29 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Rocket, Calculator, Brain, Target, TrendingDown, AlertTriangle } from 'lucide-react';
 import { useTranslation } from '@/contexts/LocaleContext';
-
-// Import model data for predictions
-import modelMetadata from '@/data/model_metadata.json';
-
-interface RealMetrics {
-  simulators_page: {
-    ml_model_accuracy_percent: number;
-  };
-}
+import { useRealMetrics, useModelMetadata } from '@/hooks/useStaticData';
 
 export default function SimulatorsPage() {
   const { t } = useTranslation();
-  const [realMetrics, setRealMetrics] = useState<RealMetrics | null>(null);
-  
-  useEffect(() => {
-    fetch('/data/real_metrics.json')
-      .then(res => res.json())
-      .then(data => setRealMetrics(data))
-      .catch(error => console.error('Error loading real metrics:', error));
-  }, []);
+  const realMetrics = useRealMetrics();
+  const modelMetadata = useModelMetadata();
   return (
     <main className="min-h-screen py-8 relative overflow-hidden">
       

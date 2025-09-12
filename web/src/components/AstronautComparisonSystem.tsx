@@ -25,9 +25,10 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Search, Plus, X, Users, ArrowRight, TrendingUp, TrendingDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRawCrewData } from '@/hooks/useStaticData';
 
 interface CrewMember {
   id: string;
@@ -56,61 +57,41 @@ interface ComparisonSystemProps {
 }
 
 export default function AstronautComparisonSystem({ maxCompare = 3, className = '' }: ComparisonSystemProps) {
-  const [allCrew, setAllCrew] = useState<CrewMember[]>([]);
+  const rawCrewData = useRawCrewData();
   const [selectedAstronauts, setSelectedAstronauts] = useState<CrewMember[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
 
-  // Load real NASA crew data
-  useEffect(() => {
-    const loadCrewData = async () => {
-      try {
-        const response = await fetch('/data/raw_crew_data.json');
-        const data = await response.json();
-        
-        if (data.crew_profiles && Array.isArray(data.crew_profiles)) {
-          // Transform the raw data to match our interface - using only available data
-          const transformedCrew = data.crew_profiles.map((profile: {
-            id: string;
-            age: number;
-            gender: string;
-            height_cm: number;
-            weight_kg: number;
-            mission_duration: number;
-            crew_type: string;
-            study_source: string;
-          }) => ({
-            id: profile.id,
-            age: profile.age,
-            gender: profile.gender,
-            height_cm: profile.height_cm,
-            weight_kg: profile.weight_kg,
-            mission_duration: profile.mission_duration,
-            crew_type: profile.crew_type,
-            study_source: profile.study_source,
-            // Use real astronaut ID from NASA LSDA data (no names available in original dataset)
-            name: profile.id,
-            mission_type: `${profile.mission_duration} days mission`,
-            role: profile.crew_type, // Real crew type from NASA data
-            country: profile.study_source, // Show data source instead of hardcoded country
-            duration_days: profile.mission_duration,
-            mission_start_date: profile.study_source, // Show source study
-            bone_density_change: (Math.random() * -0.1 + 0.02), // Small realistic variation based on real studies
-            muscle_mass_change: (Math.random() * -0.15 + 0.03),
-            cardiovascular_change: (Math.random() * -0.1 + 0.02)
-          }));
-          setAllCrew(transformedCrew);
-        }
-      } catch (error) {
-        console.error('Error loading crew data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCrewData();
-  }, []);
+  // Transform raw data to match interface
+  const allCrew: CrewMember[] = rawCrewData.crew_profiles ? rawCrewData.crew_profiles.map((profile: {
+    id: string;
+    age: number;
+    gender: string;
+    height_cm: number;
+    weight_kg: number;
+    mission_duration: number;
+    crew_type: string;
+    study_source: string;
+  }) => ({
+    id: profile.id,
+    age: profile.age,
+    gender: profile.gender,
+    height_cm: profile.height_cm,
+    weight_kg: profile.weight_kg,
+    mission_duration: profile.mission_duration,
+    crew_type: profile.crew_type,
+    study_source: profile.study_source,
+    // Use real astronaut ID from NASA LSDA data (no names available in original dataset)
+    name: profile.id,
+    mission_type: `${profile.mission_duration} days mission`,
+    role: profile.crew_type, // Real crew type from NASA data
+    country: profile.study_source, // Show data source instead of hardcoded country
+    duration_days: profile.mission_duration,
+    mission_start_date: profile.study_source, // Show source study
+    bone_density_change: (Math.random() * -0.1 + 0.02), // Small realistic variation based on real studies
+    muscle_mass_change: (Math.random() * -0.15 + 0.03),
+    cardiovascular_change: (Math.random() * -0.1 + 0.02)
+  })) : [];
 
   // Filter astronauts based on search term
   const filteredCrew = allCrew.filter(member => {
@@ -186,17 +167,6 @@ export default function AstronautComparisonSystem({ maxCompare = 3, className = 
       default: return <ArrowRight className="w-4 h-4" />;
     }
   };
-
-  if (loading) {
-    return (
-      <div className={`card-cosmic p-6 ${className}`}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400 mx-auto mb-4"></div>
-          <p className="text-cosmic-white/70">Loading astronaut data...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={`space-y-6 ${className}`}>
