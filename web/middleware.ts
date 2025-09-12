@@ -2,6 +2,18 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
+  // Intercept requests to /images/* and redirect to API route
+  if (request.nextUrl.pathname.startsWith('/images/')) {
+    const filename = request.nextUrl.pathname.split('/images/')[1]
+    return NextResponse.rewrite(new URL(`/api/images/${filename}`, request.url))
+  }
+
+  // Intercept requests to /data/* and redirect to API route
+  if (request.nextUrl.pathname.startsWith('/data/')) {
+    const filename = request.nextUrl.pathname.split('/data/')[1]
+    return NextResponse.rewrite(new URL(`/api/data/${filename}`, request.url))
+  }
+
   const response = NextResponse.next()
 
   // Add security headers for better Core Web Vitals
@@ -19,13 +31,8 @@ export function middleware(request: NextRequest) {
     '</data/model_metadata.json>; rel=preload; as=fetch; crossorigin=anonymous'
   )
 
-  // Enable compression
-  response.headers.set('Content-Encoding', 'gzip')
-  
   // Cache static assets
-  if (request.nextUrl.pathname.startsWith('/data/') || 
-      request.nextUrl.pathname.startsWith('/images/') ||
-      request.nextUrl.pathname.startsWith('/_next/static/')) {
+  if (request.nextUrl.pathname.startsWith('/_next/static/')) {
     response.headers.set(
       'Cache-Control',
       'public, max-age=86400, stale-while-revalidate=43200'
@@ -38,12 +45,9 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
+     * Match all request paths including static asset paths
+     * We need to handle /images/* and /data/* specifically
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 }

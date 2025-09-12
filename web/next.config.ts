@@ -91,20 +91,6 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-
-  // Rewrites for static file fallback
-  async rewrites() {
-    return [
-      {
-        source: '/images/:filename*',
-        destination: '/api/images/:filename*'
-      },
-      {
-        source: '/data/:filename*',
-        destination: '/api/data/:filename*'
-      }
-    ]
-  },
 }
 
 export default nextConfig;
