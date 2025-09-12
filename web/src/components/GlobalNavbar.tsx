@@ -4,14 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, BarChart3, Rocket, Users, Brain, FileText, Settings } from 'lucide-react';
-import SettingsModal from './SettingsModal';
+import { Menu, X, BarChart3, Rocket, Users, Brain, FileText } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 import { useTranslation } from '@/contexts/LocaleContext';
 
 export default function GlobalNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const pathname = usePathname();
   const { t } = useTranslation();
 
@@ -71,14 +69,6 @@ export default function GlobalNavbar() {
             
             {/* Language Selector */}
             <LanguageSelector />
-            
-            {/* Settings Button */}
-            <button
-              onClick={() => setIsSettingsOpen(true)}
-              className="p-1.5 text-white/80 hover:text-yellow-400 transition-all duration-300"
-            >
-              <Settings className="w-4 h-4" />
-            </button>
           </div>
 
           {/* Mobile - Right Side */}
@@ -127,25 +117,10 @@ export default function GlobalNavbar() {
             <div className="px-3 py-2">
               <LanguageSelector />
             </div>
-            
-            {/* Mobile Settings */}
-            <button
-              onClick={() => {
-                setIsSettingsOpen(true);
-                setIsOpen(false);
-              }}
-              className="flex items-center space-x-3 w-full px-3 py-2 rounded-md text-base font-medium transition-all duration-300 font-orbitron text-white/80 hover:text-yellow-400 hover:bg-yellow-400/5"
-            >
-              <Settings className="w-5 h-5" />
-              <span>{t('settings.title')}</span>
-            </button>
           </div>
         </div>
       )}
     </nav>
-    
-    {/* Settings Modal - Outside nav for proper z-index layering */}
-    <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   );
 }

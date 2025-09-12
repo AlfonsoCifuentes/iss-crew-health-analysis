@@ -82,10 +82,6 @@
     "viewMore": "View More",
     "viewLess": "View Less"
   },
-  "settings": {
-    "language": "Language",
-    "changeLanguage": "Change Language"
-  },
   "simulators": {
     "backHome": "Back Home",
     "title": "Mission Health Simulators",

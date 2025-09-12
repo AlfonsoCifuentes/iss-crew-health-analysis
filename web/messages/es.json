@@ -82,10 +82,6 @@
     "viewMore": "Ver Más",
     "viewLess": "Ver Menos"
   },
-  "settings": {
-    "language": "Idioma",
-    "changeLanguage": "Cambiar Idioma"
-  },
   "simulators": {
     "backHome": "Volver al Inicio",
     "title": "Simuladores de Salud de Misión",

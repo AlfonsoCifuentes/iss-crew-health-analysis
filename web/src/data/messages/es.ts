@@ -109,11 +109,6 @@ export const messages = {
     "viewMore": "Ver Más",
     "viewLess": "Ver Menos"
   },
-  "settings": {
-    "title": "Configuración",
-    "language": "Idioma",
-    "changeLanguage": "Cambiar Idioma"
-  },
   "missionTypes": {
     "shortDurationMission": "Misión de Duración Corta",
     "longDurationMission": "Misión de Duración Larga",
