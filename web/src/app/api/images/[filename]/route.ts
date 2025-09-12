@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { filename: string } }
+) {
   try {
-    const { pathname } = new URL(request.url);
-    const filename = pathname.split('/').pop();
+    const { filename } = params;
     
     if (!filename) {
       return NextResponse.json({ error: 'No filename provided' }, { status: 400 });
@@ -16,7 +18,8 @@ export async function GET(request: NextRequest) {
     
     // Check if file exists
     if (!fs.existsSync(filePath)) {
-      return NextResponse.json({ error: 'File not found' }, { status: 404 });
+      console.error(`Image not found: ${filePath}`);
+      return NextResponse.json({ error: `File not found: ${filename}` }, { status: 404 });
     }
 
     // Read file

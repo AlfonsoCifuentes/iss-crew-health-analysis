@@ -94,18 +94,16 @@ const nextConfig: NextConfig = {
 
   // Rewrites for static file fallback
   async rewrites() {
-    return {
-      fallback: [
-        {
-          source: '/images/:filename*',
-          destination: '/api/images/:filename*'
-        },
-        {
-          source: '/data/:filename*',
-          destination: '/api/data/:filename*'
-        }
-      ]
-    }
+    return [
+      {
+        source: '/images/:filename*',
+        destination: '/api/images/:filename*'
+      },
+      {
+        source: '/data/:filename*',
+        destination: '/api/data/:filename*'
+      }
+    ]
   },
 }
 
