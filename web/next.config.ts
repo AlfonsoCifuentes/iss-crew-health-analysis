@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Image optimization - Fixed for Vercel static files
+  // Image optimization - API routes fallback for Vercel
   images: {
     remotePatterns: [
       {
@@ -20,10 +20,9 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Enable optimization for better performance, but allow fallback
-    unoptimized: false,
+    // Use unoptimized for better Vercel compatibility with large files
+    unoptimized: true,
     loader: 'default',
-    // Additional config for static files
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true
   },
@@ -91,6 +90,22 @@ const nextConfig: NextConfig = {
         ]
       }
     ]
+  },
+
+  // Rewrites for static file fallback
+  async rewrites() {
+    return {
+      fallback: [
+        {
+          source: '/images/:filename*',
+          destination: '/api/images/:filename*'
+        },
+        {
+          source: '/data/:filename*',
+          destination: '/api/data/:filename*'
+        }
+      ]
+    }
   },
 }
 

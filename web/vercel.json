@@ -6,6 +6,9 @@
   "functions": {
     "src/app/**/*.tsx": {
       "maxDuration": 30
+    },
+    "src/app/api/**/*.ts": {
+      "maxDuration": 30
     }
   },
   "headers": [
@@ -27,7 +30,7 @@
       ]
     },
     {
-      "source": "/images/(.*)",
+      "source": "/api/images/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -36,7 +39,7 @@
       ]
     },
     {
-      "source": "/data/(.*)",
+      "source": "/api/data/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -49,15 +52,6 @@
       ]
     },
     {
-      "source": "/_next/image(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
       "source": "/_next/static/(.*)",
       "headers": [
         {
@@ -65,16 +59,6 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-    }
-  ],
-  "routes": [
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/data/(.*)",
-      "dest": "/data/$1"
     }
   ],
   "redirects": [
