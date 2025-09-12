@@ -52,7 +52,7 @@ export default function AdvancedAnalyticsPage() {
 
   useEffect(() => {
     // Load real metrics first
-    fetch('/api/data/real_metrics.json')
+    fetch('/api/data/real_metrics')
       .then(res => res.json())
       .then(realData => {
         setRealMetrics(realData);

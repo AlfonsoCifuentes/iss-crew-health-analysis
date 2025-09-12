@@ -36,10 +36,10 @@ export default function DataExportSystem() {
     try {
       // Load real NASA data for export
       const dataEndpoints = {
-        astronauts: '/api/data/raw_crew_data.json',
-        metrics: '/api/data/real_metrics.json',
-        missions: '/api/data/aggregated_stats.json',
-        all: ['/api/data/raw_crew_data.json', '/api/data/real_metrics.json', '/api/data/aggregated_stats.json']
+        astronauts: '/api/data/raw_crew_data',
+        metrics: '/api/data/real_metrics',
+        missions: '/api/data/aggregated_stats',
+        all: ['/api/data/raw_crew_data', '/api/data/real_metrics', '/api/data/aggregated_stats']
       };
 
       let exportData;

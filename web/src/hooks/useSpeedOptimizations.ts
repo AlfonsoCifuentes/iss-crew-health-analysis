@@ -10,9 +10,9 @@ export function useSpeedOptimizations() {
   const preloadCriticalResources = useCallback(() => {
     // Preload critical JSON data from real NASA sources
     const criticalResources = [
-      '/api/data/real_metrics.json',
-      '/api/data/aggregated_stats.json',
-      '/api/data/model_metadata.json'
+      '/api/data/real_metrics',
+      '/api/data/aggregated_stats',
+      '/api/data/model_metadata'
     ];
 
     criticalResources.forEach(resource => {
