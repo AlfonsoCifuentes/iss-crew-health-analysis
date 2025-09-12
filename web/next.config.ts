@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Image optimization - Vercel compatible
+  // Image optimization - Vercel static images fix
   images: {
     remotePatterns: [
       {
@@ -20,8 +20,8 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Ensure static images are properly handled in Vercel
-    unoptimized: false,
+    // For Vercel deployment - disable optimization for static images
+    unoptimized: true,
     loader: 'default'
   },
   

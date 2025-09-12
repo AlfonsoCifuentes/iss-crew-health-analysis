@@ -18,7 +18,8 @@
 | 👩‍🚀 Astronautas | ✅ Complete | 100% | Alta ✅ |
 | 🔍 Analytics Avanzado | ✅ Complete | 100% | Alta ✅ |
 | 📈 APIs Avanzadas | ✅ Complete | 100% | Alta ✅ |
-| 📊 Reportes | ✅ Complete | 100% | Alta ✅ |
+| �️ **Imágenes Vercel Fix** | ✅ **Complete** | 100% | **CRÍTICA** ✅ |
+| �📊 **Reportes con PDF Export** | ✅ **Complete** | 100% | **ALTA** ✅ |
 | ⚙️ Settings Modal | ✅ Complete | 100% | Alta ✅ |
 | 🎮 Gamificación | ✅ Complete | 100% | Alta ✅ |
 | 🔔 Notificaciones | ✅ Complete | 100% | Alta ✅ |

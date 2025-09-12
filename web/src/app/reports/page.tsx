@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Download, Calendar, Users, BarChart3, TrendingUp } from 'lucide-react';
+import { jsPDF } from 'jspdf';
 
 interface ReportConfig {
   type: 'health' | 'mission' | 'comparison' | 'predictive';
@@ -84,6 +85,106 @@ export default function ReportsPage() {
     { id: 'iss-043', name: 'ISS-043 (Historical Data)' }
   ];
 
+  const generatePDF = (reportData: ReportData): Blob => {
+    const doc = new jsPDF();
+    
+    // Page setup
+    const pageWidth = doc.internal.pageSize.width;
+    const margin = 20;
+    let yPosition = margin;
+    
+    // Title
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text('ISS Crew Health Analysis Report', margin, yPosition);
+    yPosition += 15;
+    
+    // Subtitle
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'normal');
+    doc.text(reportData.title || 'Health Impact Report', margin, yPosition);
+    yPosition += 10;
+    
+    // Generated date
+    doc.setFontSize(12);
+    doc.setTextColor(100);
+    doc.text(`Generated: ${new Date(reportData.generated_at).toLocaleDateString()}`, margin, yPosition);
+    doc.text(`Timeframe: ${reportData.timeframe}`, margin, yPosition + 7);
+    yPosition += 25;
+    
+    // Summary Section
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(0);
+    doc.text('Executive Summary', margin, yPosition);
+    yPosition += 12;
+    
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'normal');
+    if (reportData.summary) {
+      doc.text(`Total Subjects: ${reportData.summary.total_subjects || 'N/A'}`, margin, yPosition);
+      yPosition += 10;
+      
+      if (reportData.summary.key_findings && Array.isArray(reportData.summary.key_findings)) {
+        doc.text('Key Findings:', margin, yPosition);
+        yPosition += 8;
+        
+        reportData.summary.key_findings.forEach((finding: string) => {
+          const lines = doc.splitTextToSize(`• ${finding}`, pageWidth - margin * 2);
+          doc.text(lines, margin + 5, yPosition);
+          yPosition += (lines.length * 6) + 3;
+          
+          // Check if we need a new page
+          if (yPosition > 250) {
+            doc.addPage();
+            yPosition = margin;
+          }
+        });
+      }
+    }
+    
+    yPosition += 10;
+    
+    // Recommendations Section
+    if (reportData.metadata?.recommendations && Array.isArray(reportData.metadata.recommendations)) {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Recommendations', margin, yPosition);
+      yPosition += 12;
+      
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'normal');
+      
+      reportData.metadata.recommendations.forEach((rec: string, index: number) => {
+        const lines = doc.splitTextToSize(`${index + 1}. ${rec}`, pageWidth - margin * 2);
+        doc.text(lines, margin, yPosition);
+        yPosition += (lines.length * 6) + 5;
+        
+        // Check if we need a new page
+        if (yPosition > 250) {
+          doc.addPage();
+          yPosition = margin;
+        }
+      });
+    }
+    
+    // Footer
+    const totalPages = doc.internal.pages.length - 1;
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(150);
+      doc.text(
+        `ISS Crew Health Analysis - Page ${i} of ${totalPages}`,
+        pageWidth / 2,
+        doc.internal.pageSize.height - 10,
+        { align: 'center' }
+      );
+    }
+    
+    return new Blob([doc.output('blob')], { type: 'application/pdf' });
+  };
+
   const generateReport = async () => {
     setIsGenerating(true);
     
@@ -109,9 +210,9 @@ export default function ReportsPage() {
       
       switch (config.format) {
         case 'pdf':
-          // For now, we'll download as JSON since we don't have PDF generation
-          blob = new Blob([JSON.stringify(reportData, null, 2)], { type: 'application/json' });
-          filename = `ISS_Health_Report_${reportData.id}.json`;
+          // Generate actual PDF using jsPDF
+          blob = generatePDF(reportData);
+          filename = `ISS_Health_Report_${reportData.id}.pdf`;
           break;
         case 'csv':
           const csvData = convertToCSV(reportData);
