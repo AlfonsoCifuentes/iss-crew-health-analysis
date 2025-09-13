@@ -9,7 +9,6 @@ import CrewRolesChart from '@/components/charts/CrewRolesChart';
 import RealTimeMetrics from '@/components/RealTimeMetrics';
 import DataExportSystem from '@/components/DataExportSystem';
 import LanguageDemo from '@/components/LanguageDemo';
-import TranslationDebug from '@/components/TranslationDebug';
 import { useTranslation } from '@/contexts/LocaleContext';
 import { useAggregatedStats } from '@/hooks/useStaticData';
 
@@ -19,7 +18,6 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen py-8 relative">
-      <TranslationDebug />
       <div className="w-full px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <div className="mb-12">

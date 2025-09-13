@@ -67,7 +67,13 @@ export const messages = {
     "dataQuality": "Calidad de Datos",
     "lastUpdate": "Última Actualización",
     "connected": "Conectado",
-    "noCrewRoleData": "No hay datos de roles de tripulación disponibles"
+    "noCrewRoleData": "No hay datos de roles de tripulación disponibles",
+    "healthCorrelations": "Correlaciones de Salud",
+    "boneMuscleCorrelation": "Correlación Hueso-Músculo",
+    "correlationDescription": "Análisis estadístico que muestra una fuerte correlación entre los cambios de densidad ósea y masa muscular durante misiones espaciales de larga duración.",
+    "exploreAdvancedAnalysis": "Explorar Análisis Avanzado",
+    "advancedAnalysisDescription": "Sumérgete en los patrones de salud de la tripulación, evaluaciones de riesgo e insights de misión usando análisis avanzados y modelos de aprendizaje automático.",
+    "advancedAnalysis": "Análisis Avanzado"
   },
   "analysis": {
     "title": "Análisis de Salud de la Tripulación",
@@ -241,12 +247,6 @@ export const messages = {
     "scientificAccuracyDescription": "Todos los modelos validados contra datos publicados de NASA y agencias espaciales internacionales",
     "realtimeAnalysis": "Análisis en Tiempo Real",
     "realtimeAnalysisDescription": "Monitoreo dinámico de salud y actualizaciones de predicción basadas en datos actuales de misión",
-    "healthCorrelations": "Correlaciones de Salud",
-    "boneMuscleCorrelation": "Correlación Hueso-Músculo",
-    "correlationDescription": "Análisis estadístico que muestra una fuerte correlación entre los cambios de densidad ósea y masa muscular durante misiones espaciales de larga duración.",
-    "exploreAdvancedAnalysis": "Explorar Análisis Avanzado",
-    "advancedAnalysisDescription": "Sumérgete en los patrones de salud de la tripulación, evaluaciones de riesgo e insights de misión usando análisis avanzados y modelos de aprendizaje automático.",
-    "advancedAnalysis": "Análisis Avanzado",
     "readyToExplore": "Listo para Explorar",
     "readyToExploreDescription": "Los sistemas avanzados de predicción de salud están en línea y listos para planificación de misiones",
     "viewDataDashboard": "Ver Panel de Datos",

@@ -67,7 +67,13 @@ export const messages = {
     "dataQuality": "Data Quality",
     "lastUpdate": "Last Update",
     "connected": "Connected",
-    "noCrewRoleData": "No crew role data available"
+    "noCrewRoleData": "No crew role data available",
+    "healthCorrelations": "Health Correlations",
+    "boneMuscleCorrelation": "Bone-Muscle Correlation",
+    "correlationDescription": "Statistical analysis showing strong correlation between bone density and muscle mass changes during long-duration space missions.",
+    "exploreAdvancedAnalysis": "Explore Advanced Analysis",
+    "advancedAnalysisDescription": "Deep dive into crew health patterns, risk assessments, and mission insights using advanced analytics and machine learning models.",
+    "advancedAnalysis": "Advanced Analysis"
   },
   "analysis": {
     "title": "Crew Health Analysis",
@@ -241,12 +247,6 @@ export const messages = {
     "scientificAccuracyDescription": "All models validated against published NASA and international space agency data",
     "realtimeAnalysis": "Real-time Analysis",
     "realtimeAnalysisDescription": "Dynamic health monitoring and prediction updates based on current mission data",
-    "healthCorrelations": "Health Correlations",
-    "boneMuscleCorrelation": "Bone-Muscle Correlation",
-    "correlationDescription": "Statistical analysis showing strong correlation between bone density and muscle mass changes during long-duration space missions.",
-    "exploreAdvancedAnalysis": "Explore Advanced Analysis",
-    "advancedAnalysisDescription": "Deep dive into crew health patterns, risk assessments, and mission insights using advanced analytics and machine learning models.",
-    "advancedAnalysis": "Advanced Analysis",
     "readyToExplore": "Ready to Explore",
     "readyToExploreDescription": "Advanced health prediction systems are online and ready for mission planning",
     "viewDataDashboard": "View Data Dashboard",
