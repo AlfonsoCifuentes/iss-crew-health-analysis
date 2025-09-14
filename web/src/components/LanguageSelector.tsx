@@ -37,35 +37,34 @@ export default function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 px-2 py-1.5 rounded-md 
-                 bg-yellow-400/10 border border-yellow-400/20 hover:bg-yellow-400/20 
-                 text-white/90 hover:text-yellow-400 transition-all duration-300 
-                 text-xs font-medium min-w-[60px] justify-center"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
+                 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 
+                 text-gray-700 dark:text-gray-300 transition-colors"
         aria-label={t('settings.changeLanguage')}
-        title={`${t('settings.changeLanguage')}: ${currentLanguage?.name}`}
       >
-        <Globe size={12} className="flex-shrink-0" />
-        <span className="text-xs flex-shrink-0">{currentLanguage?.flag}</span>
+        <Globe size={16} />
+        <span className="text-sm">{currentLanguage?.flag}</span>
+        <span className="text-sm font-medium hidden sm:block">{currentLanguage?.name}</span>
         <ChevronDown 
-          size={10} 
-          className={`transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} 
+          size={14} 
+          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} 
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-1 w-32 bg-black/90 backdrop-blur-md
-                      border border-yellow-400/20 rounded-lg shadow-lg 
+        <div className="absolute right-0 top-full mt-1 w-40 bg-white dark:bg-gray-800 
+                      border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg 
                       py-1 z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               className={`w-full px-3 py-2 text-left flex items-center gap-2 
-                        hover:bg-yellow-400/10 transition-colors text-sm
-                        ${locale === lang.code ? 'bg-yellow-400/20 text-yellow-400' : 'text-white/90 hover:text-yellow-400'}`}
+                        hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors
+                        ${locale === lang.code ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400' : 'text-gray-700 dark:text-gray-300'}`}
             >
-              <span className="text-xs">{lang.flag}</span>
-              <span className="text-xs font-medium">{lang.name}</span>
+              <span className="text-sm">{lang.flag}</span>
+              <span className="text-sm font-medium">{lang.name}</span>
             </button>
           ))}
         </div>
