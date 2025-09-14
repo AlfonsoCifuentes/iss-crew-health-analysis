@@ -25,11 +25,11 @@ export default function GlobalNavbar() {
   return (
     <>
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-yellow-500/20">
-      <div className="w-full px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-12">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="flex items-center justify-between h-12 min-w-0">
           
           {/* Left Side - Logo & Title */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2 shrink-0">
               <div className="w-6 h-6 rounded-full overflow-hidden">
                 <Image
@@ -40,14 +40,14 @@ export default function GlobalNavbar() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-lg font-bold text-cosmic-white font-orbitron">
+              <span className="text-lg font-bold text-cosmic-white font-orbitron truncate">
                 ISS CREW HEALTH
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation - Center/Right */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-2 lg:space-x-4 xl:space-x-6 flex-shrink-0 ml-auto">
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -55,28 +55,34 @@ export default function GlobalNavbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-1.5 px-2 py-1 rounded-md text-sm font-medium transition-all duration-300 font-orbitron ${
+                  className={`flex items-center space-x-1.5 px-1.5 lg:px-2 py-1 rounded-md text-sm font-medium transition-all duration-300 font-orbitron whitespace-nowrap ${
                     isActive
                       ? 'text-yellow-400 bg-yellow-400/10 border border-yellow-400/20'
                       : 'text-white/80 hover:text-yellow-400 hover:bg-yellow-400/5'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
-                  <span className="hidden lg:block">{item.name}</span>
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span className="hidden lg:block text-xs xl:text-sm">{item.name}</span>
                 </Link>
               );
             })}
             
             {/* Language Selector */}
-            <LanguageSelector />
+            <div className="flex-shrink-0 ml-2">
+              <LanguageSelector />
+            </div>
           </div>
 
           {/* Mobile - Right Side */}
-          <div className="flex items-center space-x-2 md:hidden">
+          <div className="flex items-center space-x-3 md:hidden flex-shrink-0">
+            {/* Mobile Language Selector */}
+            <div className="flex-shrink-0">
+              <LanguageSelector />
+            </div>
             {/* Hamburger Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1.5 text-white/80 hover:text-yellow-400 hover:bg-yellow-400/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400 rounded-md"
+              className="p-1.5 text-white/80 hover:text-yellow-400 hover:bg-yellow-400/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400 rounded-md flex-shrink-0"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -112,11 +118,6 @@ export default function GlobalNavbar() {
                 </Link>
               );
             })}
-            
-            {/* Mobile Language Selector */}
-            <div className="px-3 py-2">
-              <LanguageSelector />
-            </div>
           </div>
         </div>
       )}
