@@ -25,29 +25,29 @@ export default function GlobalNavbar() {
   return (
     <>
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-yellow-500/20">
-      <div className="w-full px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-12">
+      <div className="w-full max-w-screen-2xl mx-auto px-3 sm:px-4">
+        <div className="grid grid-cols-12 gap-2 items-center h-14">
           
-          {/* Left Side - Logo & Title */}
-          <div className="flex items-center space-x-3">
-            <Link href="/" className="flex items-center space-x-2 shrink-0">
-              <div className="w-6 h-6 rounded-full overflow-hidden">
+          {/* Logo - Columns 1-3 */}
+          <div className="col-span-3 flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/images/iss_icon.png"
                   alt="ISS Icon"
-                  width={24}
-                  height={24}
+                  width={28}
+                  height={28}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-lg font-bold text-cosmic-white font-orbitron">
-                ISS CREW HEALTH
+              <span className="text-sm font-bold text-cosmic-white font-orbitron whitespace-nowrap hidden sm:block">
+                ISS CREW
               </span>
             </Link>
           </div>
 
-          {/* Desktop Navigation - Center/Right */}
-          <div className="hidden md:flex items-center space-x-6">
+          {/* Navigation - Columns 4-10 */}
+          <div className="col-span-7 hidden md:flex items-center justify-center space-x-1">
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -55,34 +55,38 @@ export default function GlobalNavbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-1.5 px-2 py-1 rounded-md text-sm font-medium transition-all duration-300 font-orbitron ${
+                  className={`flex flex-col items-center justify-center w-12 h-10 rounded-md text-xs font-medium transition-all duration-300 font-orbitron ${
                     isActive
                       ? 'text-yellow-400 bg-yellow-400/10 border border-yellow-400/20'
                       : 'text-white/80 hover:text-yellow-400 hover:bg-yellow-400/5'
                   }`}
+                  title={item.name}
                 >
                   <Icon className="w-4 h-4" />
-                  <span className="hidden lg:block">{item.name}</span>
+                  <span className="text-xs mt-0.5 hidden lg:block">{item.name.split(' ')[0]}</span>
                 </Link>
               );
             })}
-            
-            {/* Language Selector */}
-            <LanguageSelector />
           </div>
 
-          {/* Mobile - Right Side */}
-          <div className="flex items-center space-x-2 md:hidden">
-            {/* Hamburger Menu Button */}
+          {/* Right Side - Columns 11-12 */}
+          <div className="col-span-2 flex items-center justify-end space-x-2">
+            
+            {/* Language Selector */}
+            <div className="flex-shrink-0">
+              <LanguageSelector />
+            </div>
+
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1.5 text-white/80 hover:text-yellow-400 hover:bg-yellow-400/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400 rounded-md"
+              className="md:hidden p-2 text-white/80 hover:text-yellow-400 hover:bg-yellow-400/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400 rounded-md flex-shrink-0"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
-                <X className="h-5 w-5" aria-hidden="true" />
+                <X className="h-4 w-4" aria-hidden="true" />
               ) : (
-                <Menu className="h-5 w-5" aria-hidden="true" />
+                <Menu className="h-4 w-4" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -112,11 +116,6 @@ export default function GlobalNavbar() {
                 </Link>
               );
             })}
-            
-            {/* Mobile Language Selector */}
-            <div className="px-3 py-2">
-              <LanguageSelector />
-            </div>
           </div>
         </div>
       )}
