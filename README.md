@@ -1,115 +1,61 @@
-# 🚀 ISS Crew Health Analysis
+# ISS Crew Health Analysis
 
-> Advanced AI-powered health monitoring system for International Space Station missions
+> Analisis de salud de astronautas con datos reales de NASA, simuladores y paneles interactivos.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.5.2-black.svg)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
-[![Python](https://img.shields.io/badge/Python-3.11-green.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Resumen
 
-## 🌟 Overview
+Analitica avanzada de salud espacial con datos reales de NASA LSDA, dashboard interactivo y simuladores de misiones de larga duracion.
 
-This project provides comprehensive health monitoring and analysis for ISS crew members using real NASA LSDA data. Features advanced machine learning models for bone density prediction, interactive dashboards, and Mars mission simulation capabilities.
+## Valor del proyecto
 
-## 🛠️ Tech Stack
+Analitica avanzada de salud espacial con datos reales de NASA LSDA, dashboard interactivo y simuladores de misiones de larga duracion.
 
-- **Frontend**: Next.js 15+ (App Router), TypeScript, Tailwind CSS
-- **Backend**: Python (pandas, numpy, scikit-learn)
-- **Visualization**: Chart.js, D3.js
-- **Deployment**: Vercel
-- **Data Source**: NASA Life Sciences Data Archive (LSDA)
+Este proyecto esta orientado a convertir datos reales en una lectura accionable mediante analitica, visualizacion y una narrativa clara para la toma de decisiones.
 
-## 🚀 Quick Start
+## Funcionalidades o puntos fuertes
 
-### Prerequisites
-- Node.js 18+
-- Python 3.11+
-- npm or yarn
+- Next.js
+- TypeScript
+- NASA LSDA
+- Machine Learning
 
-### Installation
+## Stack principal
 
-```bash
-# Clone the repository
-git clone https://github.com/AlfonsoCifuentes/iss-crew-health-analysis.git
-cd iss-crew-health-analysis
+- Next.js
+- TypeScript
+- NASA LSDA
+- Machine Learning
 
-# Install Python dependencies
-pip install -r requirements.txt
+## Como explorar este proyecto
 
-# Install web dependencies
-cd web
-npm install
-```
+- Examinar el dashboard, notebook o flujo analitico principal para entender la historia de los datos.
+- Revisar las variables, metricas y visualizaciones que sostienen las conclusiones.
+- Valorar como el proyecto conecta tratamiento de datos, interpretacion y presentacion ejecutiva.
 
-### Development
+## Ficha rapida
 
-```bash
-# Run Python pipeline
-python main.py
+| Campo | Detalle |
+| --- | --- |
+| Repositorio | iss-crew-health-analysis |
+| Categoria | Data Science |
+| Grupo | Análisis de Datos |
+| Complejidad | Expert |
+| Lenguaje principal | TypeScript |
+| Primera version | 21 de mayo de 2026 |
+| Ultima actualizacion | 21 de mayo de 2026 |
 
-# Start web development server
-cd web
-npm run dev
-```
+## Enlaces
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+- Demo en vivo: https://iss-crew-health-analysis.vercel.app
+- Repositorio: https://iss-crew-health-analysis.vercel.app
 
-## 📊 Features
+## Tags
 
-- **Real-time Health Monitoring**: Live crew health metrics visualization
-- **AI-Powered Predictions**: Bone density and health risk assessment
-- **Mars Mission Simulator**: Long-duration mission health impact analysis  
-- **Interactive Dashboard**: Comprehensive data exploration tools
-- **Export Capabilities**: PDF reports and data export functionality
-- **Multi-language Support**: English and Spanish interfaces
+- Next.js
+- TypeScript
+- NASA LSDA
+- Machine Learning
 
-## 🧬 Data Science Pipeline
+## Nota
 
-1. **Data Acquisition**: NASA LSDA real astronaut health data
-2. **Preprocessing**: Advanced data cleaning and feature engineering
-3. **Machine Learning**: Random Forest models for health predictions
-4. **Visualization**: Interactive charts and statistical analysis
-
-## 📁 Project Structure
-
-```
-├── data/                   # Processed datasets
-├── models/                 # Trained ML models
-├── src/                    # Python analysis modules
-├── web/                    # Next.js frontend application
-├── reports/                # Generated analysis reports
-└── notebooks/              # Jupyter analysis notebooks
-```
-
-## 🚀 Deployment
-
-The application is deployed on Vercel with automatic CI/CD pipeline:
-
-```bash
-# Deploy to Vercel
-cd web
-npm run deploy
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Alfonso Cifuentes Alonso**
-
-- GitHub: [@AlfonsoCifuentes](https://github.com/AlfonsoCifuentes)
-- LinkedIn: [Alfonso Cifuentes Alonso](https://linkedin.com/in/alfonso-cifuentes-alonso)
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/AlfonsoCifuentes/iss-crew-health-analysis/issues).
-
-## ⭐ Show your support
-
-Give a ⭐️ if this project helped you!
-
----
-
-*© 2025 Alfonso Cifuentes Alonso. All rights reserved.*
+Este README se ha generado a partir del catalogo enriquecido del portfolio para mantener una descripcion consistente, explicativa y lista para evolucionar en cada repositorio.
