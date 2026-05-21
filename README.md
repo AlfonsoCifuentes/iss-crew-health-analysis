@@ -1,6 +1,6 @@
 # ISS Crew Health Analysis
 
-> Analisis de salud de astronautas con datos reales de NASA, simuladores y paneles interactivos.
+> ISS Crew Health Analysis: análisis de datos con foco en lectura útil y criterio analítico
 
 ## Resumen
 
@@ -8,16 +8,16 @@ Analitica avanzada de salud espacial con datos reales de NASA LSDA, dashboard in
 
 ## Valor del proyecto
 
-Analitica avanzada de salud espacial con datos reales de NASA LSDA, dashboard interactivo y simuladores de misiones de larga duracion.
+Aporta una capa de análisis que facilita detectar patrones, resumir hallazgos y comunicar conclusiones de forma útil a perfiles técnicos y no técnicos.
 
 Este proyecto esta orientado a convertir datos reales en una lectura accionable mediante analitica, visualizacion y una narrativa clara para la toma de decisiones.
 
 ## Funcionalidades o puntos fuertes
 
-- Next.js
-- TypeScript
-- NASA LSDA
-- Machine Learning
+- Exploración de datos con énfasis en patrones, sesgos y contexto
+- Visualizaciones pensadas para comunicar resultados sin ruido
+- Enfoque analítico orientado a interpretación y toma de decisiones
+- Stack principal visible y coherente: Next.js, TypeScript, NASA LSDA y Machine Learning.
 
 ## Stack principal
 
@@ -41,20 +41,13 @@ Este proyecto esta orientado a convertir datos reales en una lectura accionable 
 | Grupo | Análisis de Datos |
 | Complejidad | Expert |
 | Lenguaje principal | TypeScript |
-| Primera version | 21 de mayo de 2026 |
+| Primera version | 11 de septiembre de 2025 |
 | Ultima actualizacion | 21 de mayo de 2026 |
 
 ## Enlaces
 
 - Demo en vivo: https://iss-crew-health-analysis.vercel.app
-- Repositorio: https://iss-crew-health-analysis.vercel.app
-
-## Tags
-
-- Next.js
-- TypeScript
-- NASA LSDA
-- Machine Learning
+- Repositorio: https://github.com/AlfonsoCifuentes/iss-crew-health-analysis
 
 ## Nota
 
