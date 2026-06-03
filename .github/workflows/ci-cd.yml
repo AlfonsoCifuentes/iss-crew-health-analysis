@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
@@ -73,7 +73,7 @@ jobs:
         working-directory: ./web
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
@@ -114,7 +114,7 @@ jobs:
         working-directory: ./web
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
@@ -144,7 +144,7 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🚨 Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v10
@@ -159,7 +159,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🔍 Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -186,7 +186,7 @@ jobs:
       url: https://iss-crew-health-analysis.vercel.app
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🚀 Deploy to Vercel
         uses: amondnet/vercel-action@v25
