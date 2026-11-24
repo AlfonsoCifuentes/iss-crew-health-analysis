@@ -1,17 +1,14 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import aggregatedStatsData from '../../../../public/data/aggregated_stats.json'
 
 // API que retorna SOLO datos reales de NASA - NO SIMULADOS
 export async function GET() {
   try {
     // Load real NASA data from our generated files
-    const dataDir = path.join(process.cwd(), 'public', 'data');
     
-    const aggregatedStatsPath = path.join(dataDir, 'aggregated_stats.json');
     
     // Read real data files
-    const aggregatedStats = JSON.parse(fs.readFileSync(aggregatedStatsPath, 'utf8'));
+    const aggregatedStats = aggregatedStatsData;
     
     const currentTime = new Date().toISOString();
     
